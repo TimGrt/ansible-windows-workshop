@@ -37,7 +37,7 @@ The output gives some useful informations, the most important one are these:
 * `config file = /etc/ansible/ansible.cfg` - The currently used configuration file for Ansible
 * `python version = 3.9.13` - The Python interpreter used on the Controller (there may be multiple Python version installed...)
 
-Let's take a look at the current Ansible configuration, you can use the `cat` command to output the file contents to stdout.
+Let's take a look at an example Ansible configuration.
 
 ``` { .bash .no-copy }
 [student@ansible-1 workshop_project]$ cat /etc/ansible/ansible.cfg 
@@ -59,6 +59,7 @@ connect_timeout = 200
 command_timeout = 200
 ```
 
+
 ## Step 1 - Test connection
 
 ### Step 1.1 - On CLI
@@ -66,18 +67,24 @@ command_timeout = 200
 Ansible needs to know which hosts are targeted for the automation, therefor all Ansible content development starts with defining a *inventory* and sorting your hosts into *groups* in it. For most use cases, a inventory in the `.ini` format is the easiest to work with. Let's create a simple inventory with a single group called `windows` and put your test host in it. Create a file `hosts` (you can left out the file extenstion, by default, Ansible asumes that the file is formated in the *ini* format).
 
 ```bash
-touch
+touch hosts.ini
 ```
 
 ```ini
 [windows]
-
+NODEName
+[windows:vars]
+ansible_connection= winrm
+ansible_winrm_transport= kerberos
+ansible_port= 5986
+ansible_host= "{{ inventory_hostname }}.global.bdfgroup.net"
+ansible_user= "Your User"
 ```
 
 The inventory file is in `.ini` format, this is one of the possible formats the inventory can be provided. Ansible itself parses the inventory and uses a JSON representation, let's take a look on how Ansible sees our inventory:
 
 ```bash
-ansible-inventory --list
+ansible-inventory -i hosts.ini --list
 ```
 
 The command above outputs info about **all** hosts in the inventory, the groups in which every host is in and which variables (mostly connection variables) are defined for every host. The `ansible-inventory` utility has more functionality, use the `--help` parameter.
@@ -99,8 +106,20 @@ The ad-hoc command expects a group to target (here it is the *windows* group) an
     ```bash
     ansible -i /home/student/lab_inventory/hosts windows -m win_ping
     ```
-
     You can use the relative path as well.
+
+    If you don't want to add `-i hosts.ini` everytime you run a command. You can specify it in an `ansible.cfg` file in your working directory.
+
+    ```bash
+    touch ansible.cfg
+    ```
+    Copy the following content into this file to customize ansible to your liking or per project needs.
+
+    ``` { .bash }
+    # ansible.cfg file
+    [defaults]
+    inventory = hosts.ini
+    ```
 
 !!! failure
     Well, this didn't went well, we encountered an error.
@@ -137,14 +156,14 @@ Ok, looks good, try the ad-hoc command again.
 A missing dependency, Ansible modules are (mostly) written in Python (or in Powershell for Windows), they sometimes need additional Python modules or libraries. Let's install the missing depedency:
 
 ```bash
-pip3.9 install pywinrm --user
+pip3 install pywinrm --user
 ```
 
 We installed the `pywinrm` Python module with the Python package manager for the Python version Ansible is running with, this is needed for the initial connection from the Ansible Controller to the target host.  
 Let's install another missing dependency:
 
 ```bash
-pip3.9 install requests-credssp --user
+pip3 install pywinrm[kerberos] --user
 ```
 
 This module is needed because of the configured WinRM transport method. If we would have run the ad-hoc command, the error message would have stated the missing package.
@@ -188,13 +207,13 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | windows workshop execution environment |      |
+| Execution environment |  EE - Windows |      |
 
 Click the **Next** button
 
 | Key                | Value               | Note |
 | ------------------ | ------------------- | ---- |
-| Machine credential | Workshop Credential |      |
+| Machine credential | Your Workshop Credential |      |
 
 Once you click **LAUNCH** you will be redirected to the Job log. Every job and action in Automation Controller is recorded and stored. These logs can also be exported automatically to another logging system such as Splunk or ELK.
 
@@ -243,7 +262,7 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | windows workshop execution environment |      |
+| Execution environment | EE - Windows |      |
 
 Click the **Next** button
 
@@ -312,7 +331,7 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | windows workshop execution environment |      |
+| Execution environment | EE - Windows |      |
 
 Click the **Next** button
 
@@ -334,7 +353,7 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | windows workshop execution environment |      |
+| Execution environment | EE - Windows |      |
 
 Click the **Next** button
 
