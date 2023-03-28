@@ -95,7 +95,7 @@ Add a new task called **install IIS**. After writing the playbook, click `File` 
       loop: "{{ iis_sites }}"
 
     - name: Create IIS site
-      ansible.windows.win_iis_website:
+      community.windows.win_iis_website:
         name: "{{ item.name }}"
         state: started
         port: "{{ item.port }}"
@@ -152,7 +152,7 @@ not escape the forward slash.
 
 ```yaml
     - name: Open port for site on the firewall
-      ansible.windows.win_firewall_rule:
+      community.windows.win_firewall_rule:
         name: "iisport{{ item.port }}"
         enable: yes
         state: present
@@ -270,7 +270,7 @@ intended. If not, now is the time for us to fix it up. The playbook below should
       loop: "{{ iis_sites }}"
 
     - name: Create IIS site
-      ansible.windows.win_iis_website:
+      community.windows.win_iis_website:
         name: "{{ item.name }}"
         state: started
         port: "{{ item.port }}"
@@ -279,7 +279,7 @@ intended. If not, now is the time for us to fix it up. The playbook below should
       notify: restart iis service
 
     - name: Open port for site on the firewall
-      ansible.windows.win_firewall_rule:
+      community.windows.win_firewall_rule:
         name: "iisport{{ item.port }}"
         enable: yes
         state: present
