@@ -12,7 +12,7 @@ All of our playbooks will be stored in a single git **repository**. Multiple use
 
 ## Overview
 
-Starting at this task we are going to use Visual Studio Code as our editor. In addition, we will use Gitea for source code control. This will allow us to minimize development work on the linux command line. Other editors or source code solutions can be used, but this will show the general workflow.
+Starting at this task we are going to use Visual Studio Code as our editor. In addition, we will use Azure DevOps for source code control. This will allow us to minimize development work on the linux command line. Other editors or source code solutions can be used, but this will show the general workflow.
 
 ## Step 1: Create directory structure
 
@@ -20,18 +20,11 @@ There is a [best practice](https://docs.ansible.com/ansible/latest/user_guide/pl
 
 Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files.
 
-Open Visual Studio Code.
+Open Visual Studio Code on the remote host and select our git repository as folder.
 
-For this lab, we have already created a clone of your Git repository for you.
+![Our Git Repository](images/3-vscode-workspace.png)
 
-To access it, click the link for VS Code Access from the workshop page.
 
-![VS Code Access](images/3-vscode-access.png)
-
-At this point in the Explorer sidebar you should have a *WORKSHOP_PROJECT*
-section with only a README file in it.
-
-![Student Playbooks Repo](images/3-vscode-open-folder.png)
 
 **Step 2:** Create a directory called `iis_basic` and a file called
 `install_iis.yml`
@@ -69,25 +62,25 @@ Now that we’ve defined your play, let’s add some tasks to get some things do
 If you want to see the entire playbook for reference, skip to the bottom of this exercise.
 
 ```yaml
-      tasks:
-       - name: Install iis
-         ansible.windows.win_feature:
-           name: Web-Server
-           state: present
+  tasks:
+    - name: Install iis
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
 
-       - name: start iis service
-         ansible.windows.win_service:
-           name: W3Svc
-           state: started
+    - name: Start iis service
+      ansible.windows.win_service:
+        name: W3Svc
+        state: started
 
-       - name: Create website index.html
-         ansible.windows.win_copy:
-           content: "{{ iis_test_message }}"
-           dest: C:\Inetpub\wwwroot\index.html
+    - name: Create website index.html
+      ansible.windows.win_copy:
+        content: "{{ iis_test_message }}"
+        dest: C:\Inetpub\wwwroot\index.html
 
-       - name: Show website address
-         ansible.builtin.debug:
-           msg: "http://{{ ansible_host }}"
+    - name: Show website address
+      ansible.builtin.debug:
+        msg: "http://{{ ansible_host }}"
 ```
 
 * `tasks:` This denotes that one or more tasks are about to be defined
@@ -127,6 +120,10 @@ In this task, we use the `win_copy` module to create a file with specific conten
 ```
 
 This task uses the `debug` module to post a message at the end of playbook execution. This particular message prints out `http://` + the variable name that contains the IP address of the host we're running the playbook on (our Windows IIS server)
+
+!!! warning
+    At the moment your playbook will not run properly. There is an undefined Variable. We will solve this problem in AAP!
+
 
 ## Step 4: Saving your Playbook
 
