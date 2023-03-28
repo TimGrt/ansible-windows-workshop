@@ -91,8 +91,47 @@ source ~/.bashrc
 
 ## Configure Azure DevOps
 
-!!! warning
-    ToDo
+In Azure DevOps code is stored in *repositories*. These repositories on the other hand are kept in a *project*. Every project can have multiple repositories.
+
+Login to Azure DevOps and choose the *Project* in which you want to create your *Repository*. Every project, by default, already has one repository, we will create an additional one for our personal workshop content.
+
+In the top, open the drop-down menu and choose *New repository*.
+
+<figure markdown>
+  ![Azure DevOps - Create new repository](AzureDevOpsNewRepo.png){ loading=lazy }
+  <figcaption>Azure DevOps - Create new repository</figcaption>
+</figure>
+
+On the right of your browser window, enter a name `Ansible-Workshop-username`for your repository, replace *username* with your username abbreviation. Leave all other configuration as-is.
+
+<figure markdown>
+  ![Azure DevOps - Create new repository](AzureDevOpsNewRepo2.png){ loading=lazy width="500" }
+  <figcaption>Azure DevOps - New repository configuration</figcaption>
+</figure>
+
+Once your repository (the place where your *code* (read: Ansible content) will be stored) is created, click the `Clone` button on the right.  
+Now, click the button `Generate Git credentials`:
+
+<figure markdown>
+  ![Azure DevOps - Generate Git credentials](AzureDevOpsGitCredentials.png){ loading=lazy width="500" }
+  <figcaption>Azure DevOps - Generate Git credentials</figcaption>
+</figure>
+
+!!! tip
+    Store the password (access token) now, you won't be able to retrieve it again!
+    Also, make note of your username, we need it a bit later on.
+
+All right, almost done!  
+Now, let's clone the repository in your home directory on the Ansible Development node.
+
+Click on the `Clone` button again and copy (by clicking *Copy clone URL to clipboard*) the *HTTPS* URL.  
+In the terminal of the dev node, paste the content with a right-click after typing `git clone `:
+
+``` { .bash .no-copy }
+git clone https://******@dev.azure.com/******/******/_git/Ansible-Workshop-******
+```
+
+Change into the directory (with `cd`) and you are done for now!
 
 ## Login to AAP
 
@@ -105,154 +144,57 @@ There are a number of constructs in the Automation Controller UI that enable mul
 
 Your Automation Controller instance url and credentials were supplied to you by the trainer.
 
-Use the SAML login option, you may need to open the *icognito* browser if you need to access with a different user for single-sign on.
+Use the SAML login option, you may need to open the *icognito* browser, if you need to access with a different user for single-sign on.
 
-### Step 1 - Create Machine Credential
+### Create SCM Credential
 
 Credentials are utilized by Controller for authentication when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.
 
 There are many [types of credentials](https://docs.ansible.com/automation-controller/latest/html/userguide/credentials.html#credential-types){:target="_blank"} including machine, network, and various cloud providers. For this workshop, we are using **machine** and **source control** credentials.
 
-Select CREDENTIALS from the left hand panel under resources
+Select CREDENTIALS from the left hand panel under resources.
 
-![Cred](1-controller-credentials.png)
+<figure markdown>
+  ![AAP Credentials](1-controller-credentials.png){ loading=lazy }
+  <figcaption>AAP - Add credentials</figcaption>
+</figure>
 
-Click the ![Add](add.png) icon and add new credential
+We need to access our source code repository, where our automation projects will live.  
+Click the ![Add](add.png) icon and add a new credential.
 
-Complete the form using the following entries:
+Complete the form using the following entries, replace *username* with your username abbreviation:
 
-| Key          | Value              |                                        |
-| ------------ | ------------------ | -------------------------------------- |
-| Name         | Windows Credential |                                        |
-| Organization | Default            |                                        |
-| Type         | Machine            |                                        |
-| Username     | student#           | **Replace # with your student number** |
-| Password     | *password*         | Replace with your student password     |
-
-![Add Machine Credential](1-controller-add-machine-credential.png)
-
-Select SAVE ![Save](at_save.png)
-
-### Step 2 - Create SCM Credential
-
-Our first credential was to access our Windows machines over WinRM. We need another to access our source code repository where our automation projects will live. Repeat the process as above, but with the following details:
-
-| Key             | Value                           |                                    |
-| --------------- | ------------------------------- | ---------------------------------- |
-| Name            | Git Credential                  |                                    |
-| Description     | SCM credential for project sync |                                    |
-| Organization    | Default                         |                                    |
-| Credential Type | Source Control                  |                                    |
-| Username        | student#                        | Replace # with your student number |
-| Password        | *password*                      | Replace with your student password |
+| Key             | Value                         |                                                              |
+| --------------- | ----------------------------- | ------------------------------------------------------------ |
+| Name            | Azure DevOps *username*       |                                                              |
+| Description     | SCM credential for *username* |                                                              |
+| Organization    | *Choose your organization*    |                                                              |
+| Credential Type | Source Control                |                                                              |
+| Username        | *Your name from Azure DevOps* | Username as shown in the *Clone* button in Azure DevOps      |
+| Password        | *Your password*               | The password you retrieved when creating the Git credentials |
 
 Select SAVE ![Save](at_save.png)
 
 ![Add SCM Credential](1-controller-add-scm-credential.png)
 
-### Step 3 - Create a Project
+### Create Machine Credential
 
-A **Project** is a logical collection of Ansible content, represented in Controller. You can manage projects by placing your ansible content into a source code management (SCM) system
-supported by Controller, including Git and Subversion.
+We need to access our Windows **Test** machines over WinRM, let's create a *machine* credential for that.
 
-In this environment, playbooks are stored in a git repository available on the workshop Gitea instance. Before a **Project** can be created in Automation Controller, the git URL for the repository is needed. In order to obtain the URL of your project, login to the Gitea instance, select your workshop project and copy the `https` url presented after clicking the "Copy" button.
+Click the ![Add](add.png) icon and add another new credential.
 
-![Proj](1-gitea-project.png)
-![Clone](1-gitea-clone.png)
+Complete the form using the following entries, again, replace *username* with your username abbreviation:
 
-Click **Projects** on the left hand panel.
+| Key          | Value                        | Notes                              |
+| ------------ | ---------------------------- | ---------------------------------- |
+| Name         | Windows Test Host *username* |                                    |
+| Organization | Default                      |                                    |
+| Type         | Machine                      |                                    |
+| Username     | *Login name*                 | *Ask your trainer for assistance!* |
+| Password     | *password*                   |                                    |
 
-![Proj](1-controller-project.png)
-
-Click the ![Add](add.png) icon and add new project
-
-Complete the form using the following entries (**using your student number in SCM URL**)
-
-| Key                           | Value                                                                     |                          |
-| ----------------------------- | ------------------------------------------------------------------------- | ------------------------ |
-| Name                          | Ansible Workshop Project                                                  |                          |
-| Description                   | Windows Workshop Project                                                  |                          |
-| Organization                  | Default                                                                   |                          |
-| Default Execution Environment | windows workshop execution environment                                    |                          |
-| SCM Type                      | Git                                                                       |                          |
-| SCM URL                       | https://git.**WORKSHOP**.demoredhat.com/**student#**/workshop_project.git | URL obtained from Step 1 |
-| SCM BRANCH                    |                                                                           | Intentionally blank      |
-| SCM CREDENTIAL                | Git Credential                                                            |                          |
-
-OPTIONS
-
-* :material-checkbox-blank-outline: Clean
-* :material-checkbox-blank-outline: Delete
-* :material-checkbox-blank-outline: Track submodules
-* :material-checkbox-outline: Update Revision on Launch
-* :material-checkbox-blank-outline: Allow Branch Override
-
-![Defining a Project](1-controller-create-project.png)
+![Add Machine Credential](1-controller-add-machine-credential.png)
 
 Select SAVE ![Save](at_save.png)
 
-Scroll down and validate that the project has been successfully synchronized against the source control repository upon saving. You should see a green icon displaying "Successful" next to the project name in the list view. If the status does not show as "Successful", try pressing the "Sync Project" button again re-check the status.
-
-![Succesfull Sync](1-controller-project-success.png)
-
-### Step 4 - Inventories
-
-An inventory is a collection of hosts against which jobs may be launched. Inventories are divided into groups and these groups contain hosts. Inventories may be sourced manually, by entering host names into Controller, or from one of Automation Controller’s supported cloud providers or inventory plugins from Certified Content Collections on Automation Hub.
-
-A static Inventory has already been created for you today. Let's take a look at this inventory and highlight some properties and configuration parameters.
-
-Click **Inventories** from the left hand panel. You will see the preconfigured Inventory listed. Click the Inventories' name **Workshop Inventory** or the Edit button. ![Edit](at_edit.png)
-
-You are now viewing the Inventory. From here, you can add Hosts, Groups, or even Variables specific to this Inventory.
-
-![Edit Inventory](1-controller-edit-inventory.png)
-
-We will be viewing the hosts, so click the **HOSTS** button.
-
-In the Hosts view, we can see every host associated with this inventory. You will also see which groups a host is associated with. Hosts can be associated with multiple groups. These groups can later be used to narrow down the exact hosts we will later run our automation on.
-
-![Hosts View](1-controller-hosts-view.png)
-
-If you click the **GROUPS** button and then select the **Windows** group, you can inspect variables set at the group level that will apply to all hosts in that group.
-
-![Group Edit](1-controller-group-edit.png)
-
-Today, we have already defined a handful of variables to tell Controller how to connect to hosts in this group. You do not have to define these variables as a Group variable here, they could also be Host variables or reside directly in your Template or Playbook. However, because these variables will be the same for **ALL** windows hosts in our environment, we defined them for the entire windows group.
-
-By default, Ansible will attempt to use SSH to connect to any Host, so for Windows we need to tell it utilize a different connection method, in
-this case, [WinRM](https://docs.ansible.com/ansible/latest/user_guide/windows_winrm.html){:target="_blank"}.
-
-**`ansible_connection: winrm`**
-
-We also instruct Ansible to connect to the WinRM SSL port 5986 (the non-SSL port runs on 5985 but is unencrypted).
-
-**`ansible_port: 5986`**
-
-We also tell Ansible to ignore the WinRM cert, since our lab doesn’t have a proper certificate store setup.
-
-**`ansible_winrm_server_cert_validation: ignore`**
-
-Windows also has various authentication methods that we can utilize to connect. Here we tell Ansible to use the **CredSSP** Transport Method to authenticate to our Windows host:
-
-**`ansible_winrm_transport: credssp`**
-
-If you click the **HOSTS** button, you can view the hosts belonging to the windows group. If you click the link for the host on this page, you can view the host specific variables that have been defined.
-
-![Host Edit](1-controller-host-edit.png)
-
-**`ansible_host`**
-
-This is the IP address of this particular server.
-
-**`ansible_password`**
-
-This is the password needed to connect to this server.
-
-**`ansible_user`**
-
-This is the username that Ansible will use along with the password to connect to this server.
-
-These variables are very host specific thus have been defined at the host level instead of at the group level.
-
-You can find more information about these and other settings in the [Ansible Windows Guides](https://docs.ansible.com/ansible/latest/user_guide/windows.html){:target="_blank"}.  
-The authentication settings are particularly important and you will need to review them and decide which method is best for your needs.
+Perfect, all done for now, you are prepared for all further exercises!

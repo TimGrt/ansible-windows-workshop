@@ -21,11 +21,11 @@ Complete the form using the following values, replace *username* with your usern
 
 Now, the form changes, input the following values:
 
-| Key                        | Value                                                    |
-| -------------------------- | -------------------------------------------------------- |
-| Source Control URL         | *Input your Git repo e.g. https://...@dev.azure.com/...* |
-| Source Control Credentials | *Choose your Git credential*                             |
-| Options                    | :material-checkbox-outline: Update Revision on Launch    |
+| Key                        | Value                                                 | Note                                                     |
+| -------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
+| Source Control URL         | https://...                                           | *Input your HTTPS Git URL* |
+| Source Control Credentials | Azure DevOps *username*                               | *Choose your Git credential*                             |
+| Options                    | :material-checkbox-outline: Update Revision on Launch |                                                          |
 
 Click SAVE ![Save](images/at_save.png). Your project should sync automatically, otherwise click **Projects** and then click the sync icon next to your project. Once this is complete, you can create the job template.
 
@@ -37,7 +37,7 @@ Select **Templates**.
 
 Click the ![Add](add.png) icon, and select Job Template.
 
-Complete the form using the following values:
+Complete the form using the following values, replace *username* with your username abbreviation:
 
 | Key                   | Value                                           |
 | --------------------- | ----------------------------------------------- |
@@ -76,6 +76,13 @@ After configuring your survey, click **Save**. On the resulting page, turn on th
 
 ![Survey creating](images/4-survey-created.png)
 
+!!! tip
+    You need to activate your survey with the slider!
+
+??? note "The playbook failed locally, what now?"
+    Remember that your playbook did not run successful on the command-line because of a undefined variable?  
+    In the survey above we defined a *default* value for the variable, you could do this locally as well.
+
 ## Running Job Template
 
 Now that you’ve successfully created your Job Template, you are ready to launch it. Once you do, you will be redirected to a job screen which is refreshing in real time showing you the status of the job.
@@ -101,11 +108,14 @@ playbook.
 
 ![Play and Task Output](images/4-job-summary-output.png)
 
-When the job has successfully completed, you should see a URL to your website printed at the bottom of the job output.
+When the job has successfully completed, the last task tells us what to do. Connect with RDP to the node, open a browser and input `http://localhost`.
 
 If all went well, you should see something like this, but with your own custom message of course.
 
 ![New Website with Personalized Test Message](images/4-website-output.png)
+
+!!! note
+    As these are test hosts only, the firewall does not allow external access to the webserver, therefor we need to check this locally.
 
 ## Optional
 

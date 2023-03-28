@@ -3,11 +3,8 @@ site_name: Ansible Workshop
 copyright: Copyright &copy; Computacenter 2023
 extra:
   social:
-    - icon: fontawesome/brands/gitlab
-      link: https://gitlab.ccloud.ninja/tgruetzmacher/ansible-workshop-exercises
-      name: Project in Gitlab
     - icon: fontawesome/brands/docker
-      link: https://gitlab.ccloud.ninja/tgruetzmacher/ansible-workshop-exercises/-/blob/main/dockerfiles/slim/Dockerfile
+      link: https://github.com/TimGrt/ansible-windows-workshop/blob/main/Dockerfile
       name: Container Definition
 extra_css:
   - assets/stylesheets/tables.css
@@ -80,8 +77,8 @@ markdown_extensions:
   - tables
   - pymdownx.tasklist:
       custom_checkbox: true
-repo_url: https://github.com/TimGrt/Ansible-Workshop-Exercises
-repo_name: timgrt/ansible-workshop-exercises
+repo_url: https://github.com/TimGrt/ansible-windows-workshop
+repo_name: timgrt/ansible-windows-workshop
 # Navigation definition
 nav:
   - "Workshop Overview": 

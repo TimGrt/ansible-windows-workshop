@@ -20,17 +20,16 @@ There is a [best practice](https://docs.ansible.com/ansible/latest/user_guide/pl
 
 Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files.
 
-Open Visual Studio Code on the remote host and select our git repository as folder.
+Open Visual Studio Code on the remote host and select your git repository as folder.
 
 ![Our Git Repository](images/3-vscode-workspace.png)
-
 
 
 **Step 2:** Create a directory called `iis_basic` and a file called
 `install_iis.yml`
 
-```bash
-[student@ansible-1 ansible-files]$ mkdir iis_basics
+``` { .bash .no-copy }
+[student@ansible-1 ansible-files]$ mkdir iis_basic
 ```
 
 You can also do this with VS Code.  
@@ -64,23 +63,23 @@ If you want to see the entire playbook for reference, skip to the bottom of this
 ```yaml
   tasks:
     - name: Install iis
-      ansible.windows.win_feature:
+      community.windows.win_feature:
         name: Web-Server
         state: present
 
     - name: Start iis service
-      ansible.windows.win_service:
+      community.windows.win_service:
         name: W3Svc
         state: started
 
     - name: Create website index.html
-      ansible.windows.win_copy:
+      community.windows.win_copy:
         content: "{{ iis_test_message }}"
         dest: C:\Inetpub\wwwroot\index.html
 
     - name: Show website address
       ansible.builtin.debug:
-        msg: "http://{{ ansible_host }}"
+        msg: "Open an RDP session and open http://localhost in a browser."
 ```
 
 * `tasks:` This denotes that one or more tasks are about to be defined
@@ -91,7 +90,7 @@ If you want to see the entire playbook for reference, skip to the bottom of this
     When ommiting the `name` parameter, your playbook only will output that it does something with the `ansible.windows.win_feature` module, but not what it does exactly.
 
 ```yaml
-    ansible.windows.win_feature:
+    community.windows.win_feature:
       name: Web-Server
       state: present
 ```
@@ -99,7 +98,7 @@ If you want to see the entire playbook for reference, skip to the bottom of this
 These three lines are calling the Ansible module **`win_feature`** to install the IIS Web Server. [Click here](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_feature_module.html){:target="_blank"} to see all options for the `win_feature` module.
 
 ```yaml
-    ansible.windows.win_service:
+    community.windows.win_service:
       name: W3Svc
       state: started
 ```
@@ -107,7 +106,7 @@ These three lines are calling the Ansible module **`win_feature`** to install th
 The next few lines are using the ansible module **win_service** to start the IIS service. The `win_service` module is the preferred way of controlling services on remote hosts. [Click here](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_service_module.html){:target="_blank"} to learn more about the **`win_service`** module.
 
 ```yaml
-    ansible.windows.win_copy:
+    community.windows.win_copy:
       content: "{{ iis_test_message }}"
       dest: C:\Inetpub\wwwroot\index.html
 ```
@@ -116,14 +115,19 @@ In this task, we use the `win_copy` module to create a file with specific conten
 
 ```yaml
     ansible.builtin.debug:
-      msg: http://{{ ansible_host }}
+      msg: "Open an RDP session and open http://localhost in a browser."
 ```
 
-This task uses the `debug` module to post a message at the end of playbook execution. This particular message prints out `http://` + the variable name that contains the IP address of the host we're running the playbook on (our Windows IIS server)
+This task uses the `debug` module to post a message at the end of playbook execution.
+
+**Try to run your playbook!** Execute the following command:
+
+```bash
+ansible-playbook -i hosts.ini iis_basic/install_iis.yml
+```
 
 !!! warning
     At the moment your playbook will not run properly. There is an undefined Variable. We will solve this problem in AAP!
-
 
 ## Step 4: Saving your Playbook
 
@@ -191,21 +195,21 @@ You are ready to automate!
 
   tasks:
     - name: install iis
-      ansible.windows.win_feature:
+      community.windows.win_feature:
         name: Web-Server
         state: present
 
     - name: start iis service
-      ansible.windows.win_service:
+      community.windows.win_service:
         name: W3Svc
         state: started
 
     - name: Create website index.html
-      ansible.windows.win_copy:
+      community.windows.win_copy:
         content: "{{ iis_test_message }}"
         dest: C:\Inetpub\wwwroot\index.html
 
     - name: Show website address
       ansible.builtin.debug:
-        msg: http://{{ ansible_host }}
+        msg: "Open an RDP session and open http://localhost in a browser."
 ```

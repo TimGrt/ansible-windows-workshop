@@ -37,7 +37,7 @@ The output gives some useful informations, the most important one are these:
 * `config file = /etc/ansible/ansible.cfg` - The currently used configuration file for Ansible
 * `python version = 3.9.13` - The Python interpreter used on the Controller (there may be multiple Python version installed...)
 
-Let's take a look at an example Ansible configuration.
+Let's take a look at an **example** Ansible configuration.
 
 ``` { .bash .no-copy }
 [student@ansible-1 workshop_project]$ cat /etc/ansible/ansible.cfg 
@@ -59,16 +59,17 @@ connect_timeout = 200
 command_timeout = 200
 ```
 
-
 ## Step 1 - Test connection
 
 ### Step 1.1 - On CLI
 
-Ansible needs to know which hosts are targeted for the automation, therefor all Ansible content development starts with defining a *inventory* and sorting your hosts into *groups* in it. For most use cases, a inventory in the `.ini` format is the easiest to work with. Let's create a simple inventory with a single group called `windows` and put your test host in it. Create a file `hosts` (you can left out the file extenstion, by default, Ansible asumes that the file is formated in the *ini* format).
+Ansible needs to know which hosts are targeted for the automation, therefor all Ansible content development starts with defining a *inventory* and sorting your hosts into *groups* in it. For most use cases, a inventory in the `.ini` format is the easiest to work with. Let's create a simple inventory with a single group called `windows` and put your test host in it. Create a file `hosts.ini` (you could leave out the file extension, by default, Ansible asumes that the file is formated in the *ini* format).
 
 ```bash
 touch hosts.ini
 ```
+
+Add the following inventory definition and variables:
 
 ```ini
 [windows]
@@ -94,7 +95,7 @@ All right, we have an inventory, let's test if we can reach our target node in t
 Execute the following command:
 
 ```bash
-ansible windows -m ansible.windows.win_ping
+ansible -i hosts.ini windows -m community.windows.win_ping
 ```
 
 The ad-hoc command expects a group to target (here it is the *windows* group) and a module with optional arguments.
@@ -104,11 +105,11 @@ The ad-hoc command expects a group to target (here it is the *windows* group) an
     If the `inventory` parameter is not set in the `ansible.cfg` file, you need to provide the path to your inventory file with the `-i` (`--inventory`) parameter when executing the command.
 
     ```bash
-    ansible -i /home/student/lab_inventory/hosts windows -m win_ping
+    ansible -i hosts.ini windows -m win_ping
     ```
     You can use the relative path as well.
 
-    If you don't want to add `-i hosts.ini` everytime you run a command. You can specify it in an `ansible.cfg` file in your working directory.
+    If you don't want to add `-i hosts.ini` everytime you run a command, you can specify it in an `ansible.cfg` file in your working directory.
 
     ```bash
     touch ansible.cfg
@@ -126,7 +127,7 @@ The ad-hoc command expects a group to target (here it is the *windows* group) an
 
     ```bash
     student1-win1 | FAILED! => {
-        "msg": "The module win_ping was redirected to ansible.windows.win_ping, which could not be loaded."
+        "msg": "The module win_ping was redirected to community.windows.win_ping, which could not be loaded."
     }
     ```
 
@@ -139,7 +140,7 @@ ansible-galaxy collection list
 Another error, this one states that no collections (except the builtin collection *ansible.builtin*) are installed, let's install the missing collection:
 
 ```bash
-ansible-galaxy collection install ansible.windows
+ansible-galaxy collection install community.windows
 ```
 
 Ok, looks good, try the ad-hoc command again.
@@ -185,11 +186,13 @@ student1-win1 | SUCCESS => {
 
 After running the *ad-hoc* command on the command line, let's do it in the Automation Platform.
 
-As before, we will need to go to our Inventory. So click **Inventories** on the left panel, and then click the name of our Inventory **Workshop Inventory**. Now that you are on the Inventory Details page, we will need to go select our Host. So click **HOSTS**.
+As before, we will need an Inventory.
+
+Click **Inventories** on the left panel, and then click the name of our Inventory **Workshop Inventory**. Now that you are on the Inventory Details page, we will need to go select our Host. So click **HOSTS**.
 
 Next to each host is a checkbox. Check the box next to each host you want to run an ad-hoc Command on. Select the **Run Command** button.
 
-![Run Command](images/2-adhoc-run-command.png)
+![Run Command](2-adhoc-run-command.png)
 
 This will pop up the **Execute Command** window. From here is where we can run a single task against our hosts.
 
@@ -205,15 +208,15 @@ Fill out this form as follows
 
 Click the **Next** button
 
-| Key                   | Value                                  | Note |
-| --------------------- | -------------------------------------- | ---- |
-| Execution environment |  EE - Windows |      |
+| Key                   | Value            | Note |
+| --------------------- | ---------------- | ---- |
+| Execution environment | BSS EE - Windows |      |
 
 Click the **Next** button
 
-| Key                | Value               | Note |
-| ------------------ | ------------------- | ---- |
-| Machine credential | Your Workshop Credential |      |
+| Key                | Value                        | Note                                                |
+| ------------------ | ---------------------------- | --------------------------------------------------- |
+| Machine credential | Windows Test Host *username* | Your personal Machine credential you created before |
 
 Once you click **LAUNCH** you will be redirected to the Job log. Every job and action in Automation Controller is recorded and stored. These logs can also be exported automatically to another logging system such as Splunk or ELK.
 
@@ -262,13 +265,13 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | EE - Windows |      |
+| Execution environment | BSS EE - Windows |      |
 
 Click the **Next** button
 
-| Key                | Value               | Note |
-| ------------------ | ------------------- | ---- |
-| Machine credential | Workshop Credential |      |
+| Key                | Value                        | Note                                                |
+| ------------------ | ---------------------------- | --------------------------------------------------- |
+| Machine credential | Windows Test Host *username* | Your personal Machine credential you created before |
 
 You should see output like this:
 
@@ -293,7 +296,7 @@ ansible windows -m ansible.windows.win_shell -a "Get-Service"
 The output looks something like this:
 
 ```bash
-student@ansible-1 workshop_project]$ ansible windows -m ansible.windows.win_shell -a "Get-Service"
+student@ansible-1 workshop_project]$ ansible windows -m community.windows.win_shell -a "Get-Service"
 student1-win1 | CHANGED | rc=0 >>
 
 Status   Name               DisplayName                           
@@ -331,13 +334,13 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | EE - Windows |      |
+| Execution environment | BSS EE - Windows |      |
 
 Click the **Next** button
 
-| Key                | Value               | Note |
-| ------------------ | ------------------- | ---- |
-| Machine credential | Workshop Credential |      |
+| Key                | Value                        | Note                                                |
+| ------------------ | ---------------------------- | --------------------------------------------------- |
+| Machine credential | Windows Test Host *username* | Your personal Machine credential you created before |
 
 Launch the job and view the results. You will see that it returns a direct output of what the Powershell command returned. This data can be stored to a variable and directly parsed inside your Ansible playbook later on.
 
@@ -353,15 +356,15 @@ Click the **Next** button
 
 | Key                   | Value                                  | Note |
 | --------------------- | -------------------------------------- | ---- |
-| Execution environment | EE - Windows |      |
+| Execution environment | BSS EE - Windows |      |
 
 Click the **Next** button
 
-| Key                | Value               | Note |
-| ------------------ | ------------------- | ---- |
-| Machine credential | Workshop Credential |      |
+| Key                | Value                        | Note                                                |
+| ------------------ | ---------------------------- | --------------------------------------------------- |
+| Machine credential | Windows Test Host *username* | Your personal Machine credential you created before |
 
-The difference between `ansible.windows.win_shell` and `ansible.windows.win_command` is that `win_command` arguments will not be processed through the shell, so variables like `$env:HOME` and operations like `<`, `>`, `|`, and `;` will not work (use the `ansible.windows.win_shell` module if you need these features). The `ansible.windows.win_command` module is much more secure as it’s not affected by the user’s environment.
+The difference between `community.windows.win_shell` and `community.windows.win_command` is that `win_command` arguments will not be processed through the shell, so variables like `$env:HOME` and operations like `<`, `>`, `|`, and `;` will not work (use the `community.windows.win_shell` module if you need these features). The `community.windows.win_command` module is much more secure as it’s not affected by the user’s environment.
 
 ## End Result
 
