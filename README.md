@@ -1,10 +1,10 @@
 # Ansible Workshop Exercises
 
 This repository contains all exercise descriptions for my Ansible Workshop, utilizing the Red Hat demo environment. The Workshop is inspired by the [Red Hat Training course for Ansible](https://github.com/ansible/workshops), but adds additional exercises and more descriptions for a multi-day workshop.  
-The exercises are build with MkDocs and published to [Github pages](https://timgrt.github.io/Ansible-Workshop-Exercises).  
+The exercises are build with MkDocs and published to [Github pages](https://timgrt.github.io/ansible-windows-workshop/).  
 A Dockerfile is included to build a container image which publishes the exercises as a Webserver.
 
-[![Deploy MkDocs to Github pages](https://github.com/TimGrt/Ansible-Workshop-Exercises/actions/workflows/ci.yml/badge.svg)](https://github.com/TimGrt/Ansible-Workshop-Exercises/actions/workflows/ci.yml)
+[![Deploy MkDocs to Github pages](https://github.com/TimGrt/ansible-windows-workshop/actions/workflows/ci.yml/badge.svg)](https://github.com/TimGrt/ansible-windows-workshop/actions/workflows/ci.yml)
 
 ## Podman
 
@@ -19,19 +19,19 @@ sudo dnf install -y @container-tools git
 Clone the repository:
 
 ```bash
-git clone https://github.com/TimGrt/Ansible-Workshop-Exercises.git
+git clone https://github.com/TimGrt/ansible-windows-workshop.git
 ```
 
 Change into the cloned directory and build the container image:
 
 ```bash
-podman build -t ansible-workshop-exercises .
+podman build -t ansible-windows-workshop .
 ```
 
 Run a container from the previously build image, the webserver is available at Port 8080:
 
 ```bash
-podman run -d -p 8080:80/tcp --name workshop ansible-workshop-exercises
+podman run -d -p 8080:80/tcp --name workshop ansible-windows-workshop
 ```
 
 Get the **public** IP address of *node2* from the lab inventory, suffix with Port 8080 and open the exercises in the browser.
@@ -44,13 +44,13 @@ For the sake of completion, here is how to build and run everything with Docker.
 Build the container image:
 
 ```bash
-docker build -t ansible-workshop-exercises .
+docker build -t ansible-windows-workshop .
 ```
 
 Run a container from the previously build image, the webserver is available at Port 8080:
 
 ```bash
-docker run -d -p 8080:80/tcp --name workshop ansible-workshop-exercises
+docker run -d -p 8080:80/tcp --name workshop ansible-windows-workshop
 ```
 
 ## Development
