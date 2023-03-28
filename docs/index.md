@@ -1,0 +1,32 @@
+# Ansible Windows Enablement Workshop
+
+**Welcome to the Ansible Workshop!**
+
+<figure markdown>
+  [![CC Logo](computacenter.png){ width="400", loading=lazy }](https://www.computacenter.com/de-de){:target="_blank"}
+  <figcaption></figcaption>
+</figure>
+
+Ansible is a radically simple IT automation system. It handles configuration management, application deployment, cloud provisioning, ad-hoc task execution, network automation, and multi-node orchestration.  
+
+You will learn about Ansible:
+
+1. starting with the basics of understanding foundational command line activities.
+2. applying what you’ve learned to the Ansible automation controller for your enterprise use cases.
+
+You’ll start off by writing your first steps with Ansible Ad-hoc commands, playbooks, working with variables and much more. Next you’ll get started on automation controller, understand inventory and credential management, projects, job templates, surveys, workflows and more.
+
+After finishing this lab you are ready to start using Ansible for your automation requirements.
+
+## Time planning
+
+The time required to do the workshops strongly depends on multiple factors: the length of the workshop. the number of participants, how familiar you are with Linux in general and how much discussions are done in between.
+
+Having said that, the exercises themselves should take roughly 4-5 hours.  
+
+## Lab Overview
+
+<figure markdown>
+  ![Lab Diagram](ansible_windows_diagram.png){ loading=lazy }
+  <figcaption>High-Level overview of Lab hosts</figcaption>
+</figure>
