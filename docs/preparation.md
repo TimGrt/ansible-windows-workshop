@@ -4,6 +4,50 @@
 
 We will be using [Visual Studio Code (VScode)](https://code.visualstudio.com/){:target="_blank"} as our IDE for Ansible development, we will connect VScode to a (Linux) development host.
 
+??? warning "**I never worked with VSCode** ! What do I need to know?"
+
+    VSCode ist a really powerfull and customizable IDE. Nearly everything you need to work with Textfiles is there or can be added as a Plugin.
+
+    These Plugins are the main point for many people to choose VSCode.
+    (wait a moment, isn't that extendability also a reason people use Ansible?)
+
+    The unchanged look and feel of VSCode after the first start
+
+    ![Visual Studio Code unchanged look](vscode-first-look.png)
+
+    In the `Editor` Area there is a `Walktroughs` Section. It is highly advised to take a look at the Guides there even as a long time User you may be surprised by some features or shortcuts.
+
+    In the `Activity Bar` there are alot of important things present that need on a regular basis. From top to bottom:
+    ```markdown
+      + File Explorer
+        * Expands to a file explorer where you can see the folder structure. 
+          Maybe you need to select a folder first
+      + Search/Replace
+        * Search and replace in your working directory accross all files
+      + Git / Source Control
+        * Use versioncontrol to commit your change, switch branches 
+          and push/pull to a remote destination
+      + Run / Debug
+        * not really needed for ansible
+      + Extensions
+        * All the Extension in a single place ready to search/download/install/uninstall 
+      + User Account
+        * Your User Account 
+      + VSCode Settings
+        * All Settings, preferences, themes commands and a lot more to explore here
+    ```
+
+    This is small overview. We will add more functionality in the preparation phase.
+
+Add the *Remote Explorer* extension as your first Plugin.
+<figure markdown>
+  ![Install VScode Remote SSH Extension](vscode-install-remote-ssh.png)
+  <figcaption>Install VScode Remote SSH Extension</figcaption>
+</figure>
+
+??? info "**I never worked with VSCode** ! What changed?"
+    Please wait a moment for it to finish. Afterwards there will be a new Icon in your `Activity Bar` it appears right under the `Extensions` Icon. The Status Bar also changed a bit in the left corner. There is a file opening in the Editor Pane with detailed Informations and Settings for the plugin you just installed. Sometimes it even shows a small demo.
+
 VScode has a *Remote Explorer* extension on the far left, click on it, we will add a new *SSH* connection. Click on *Open SSH config file*, the :octicons-gear-16: icon. Use the personal `.ssh\config` file, the first entry in the list.
 
 <figure markdown>
@@ -24,28 +68,25 @@ Host Ansible-Dev-Node
 
 After saving, if the new SSH target does not show up, click the :fontawesome-solid-arrow-rotate-right: *Refresh* button when hovering above the *Remote* tab.
 
-Do a *right-click* on the SSH target *Ansible-Dev-Node* and choose *Connect in current window...*. You will be asked two questions, what kind of platform the target node is (choose `Linux`), afterwards input your password.
+Do a *right-click* on the SSH target *Ansible-Dev-Node* and choose *Connect in current window...*. You will be asked two questions, what kind of platform the target node is (choose `Linux`), afterwards input your password. On the first connection you need to enter your password multiple times. 
 
 <figure markdown>
   ![VScode Remote SSH connection](VScodeRemoteSSHconnection.png)
-  <figcaption>VScode Remote SSH connection</figcaption>
+  <figcaption>VScode Remote SSH connection 1</figcaption>
 </figure>
-
-Give it some time for installing the VScode plugin (in `~/.vscode-server`), a successful connection is established once a green *SSH: Ansible-Dev-Node* box is shown in the VScode footer.
-
-### Useful VScode Extension
-
-!!! tip
-    This is an optional step, it may help with the first steps and is useful for further development with Ansible.
-
-Visual Studio Code has a huge *Marketplace* with loads of useful Plugins or feature extension, one of which is especially useful for Ansible Development and is directly from RedHat and itself is developed with all code open source.
 
 <figure markdown>
-  ![VScode Marketplace Ansible Extension](VScodeMarketPlaceAnsibleExtension.png)
-  <figcaption>VScode Marketplace Ansible Extension</figcaption>
+  ![VScode Remote SSH connection](vscode-connect-remote-ssh.png)
+  <figcaption>VScode Remote SSH connection 2</figcaption>
 </figure>
 
-Go to *Extensions* and search for *Ansible*. Use the extension from *Red Hat*, this one is activly maintained. In the extension description, click the *Install* button.
+Give it some time for installing the VScode plugin (in `~/.vscode-server`), a successful connection is established once a green *SSH: Ansible-Dev-Node* box is shown in the VScode footer. If you open a Terminal now, you will be on the remote host and have a remote shell and linux functionality.
+
+<figure markdown>
+  ![VScode Remote SSH connection](vscode-connected-remote-ssh.png)
+  <figcaption>VScode Remote SSH connected</figcaption>
+</figure>
+
 
 ### Configure Git
 
@@ -88,6 +129,42 @@ Afterwards, *source* the file for the changes to take effect:
 ```bash
 source ~/.bashrc
 ```
+
+### Useful VScode Extension
+
+!!! tip
+    This is an optional step, it may help with the first steps and is useful for further development with Ansible.
+
+Visual Studio Code has a huge *Marketplace* with loads of useful Plugins or feature extension, one of which is especially useful for Ansible Development and is directly from RedHat and itself is developed with all code open source.
+
+<figure markdown>
+  ![VScode Marketplace Ansible Extension](VScodeMarketPlaceAnsibleExtension.png)
+  <figcaption>VScode Marketplace Ansible Extension</figcaption>
+</figure>
+
+Go to *Extensions* and search for *redhat.ansible*. Use the extension from *Red Hat*, this one is activly maintained. In the extension description, click the *Install* button.
+
+??? info "What do I need this extension for and what changed?"
+    This extension adds some cool features to VSCode that are purely ansible specific and need `ansible` and `ansible-lint` on your remote host to work.
+
+    If VSCode identifies your file as an "Ansible" file it will change it behaviour. You can check this on the right side of your `Status Bar` at the bottom. `.yml` and `.yaml` files should be identified as YAML Language. Which is correct but we want to change that behaviour to be even "more" correct.
+    
+    ![Language Settings on Default](vscode-status-bar-language-settings.png)
+
+    Click on `YAML`. VSCode opens a dialog at the top. Select `Configure File Association for '.yml'`. Then select Ansible.
+
+    ![Language Settings on Default](vscode-language-settings-change.png)
+    ![Language Settings on Default](vscode-language-settings-change-2.png)
+
+    The language in the `Status Bar` should look like this:
+
+    ![Language Settings on Default](vscode-language-settings-ansible.png)
+
+
+    !!! info "For more information read the official instructions, please" 
+    
+        [Ansible Extension Information](https://marketplace.visualstudio.com/items?itemName=redhat.ansible){:target="_blank"} for this extension if you want to leverage it's features
+
 
 ## Configure Azure DevOps
 
