@@ -17,7 +17,7 @@ We will be using [Visual Studio Code (VScode)](https://code.visualstudio.com/){:
 
     In the `Editor` Area there is a `Walktroughs` Section. It is highly advised to take a look at the Guides there even as a long time User you may be surprised by some features or shortcuts.
 
-    In the `Activity Bar` there are alot of important things present that need on a regular basis. From top to bottom:
+    In the `Activity Bar` there are alot of important things present that you will need on a regular basis. From top to bottom:
     ```markdown
       + File Explorer
         * Expands to a file explorer where you can see the folder structure. 
@@ -34,10 +34,10 @@ We will be using [Visual Studio Code (VScode)](https://code.visualstudio.com/){:
       + User Account
         * Your User Account 
       + VSCode Settings
-        * All Settings, preferences, themes commands and a lot more to explore here
+        * All Settings, preferences, themes, commands and a lot more to explore
     ```
 
-    This is small overview. We will add more functionality in the preparation phase.
+    This is small overview for the vanilla VSCode experience. We will add more functionality in the preparation phase.
 
 Add the *Remote Explorer* extension as your first Plugin.
 <figure markdown>
@@ -48,7 +48,7 @@ Add the *Remote Explorer* extension as your first Plugin.
 ??? info "**I never worked with VSCode** ! What changed?"
     Please wait a moment for it to finish. Afterwards there will be a new Icon in your `Activity Bar` it appears right under the `Extensions` Icon. The Status Bar also changed a bit in the left corner. There is a file opening in the Editor Pane with detailed Informations and Settings for the plugin you just installed. Sometimes it even shows a small demo.
 
-VScode has a *Remote Explorer* extension on the far left, click on it, we will add a new *SSH* connection. Click on *Open SSH config file*, the :octicons-gear-16: icon. Use the personal `.ssh\config` file, the first entry in the list.
+VScode has now a *Remote Explorer* icon in the `Activity Bar`, click on it, we will add a new *SSH* connection. Click on *Open SSH config file*, the :octicons-gear-16: icon. Use the personal `.ssh\config` file, the first entry in the list.
 
 <figure markdown>
   ![VScode Remote SSH configuration](VScodeRemoteSSHconfig.png)
@@ -87,22 +87,6 @@ Give it some time for installing the VScode plugin (in `~/.vscode-server`), a su
   <figcaption>VScode Remote SSH connected</figcaption>
 </figure>
 
-
-### Configure Git
-
-We will be working with Git, we will need to configure it slightly. Run the following commands:
-
-```bash
-git config --global user.name "FirstName LastName"
-```
-
-```bash
-git config --global user.email firstNameLastName@beiersdorf.com
-```
-
-!!! warning
-    These are only examples, use your real Name and E-Mail address!  
-    This is used to identify, who made the code changes, which is fundamental for collaborative work on your Ansible playbooks.
 
 ### Install Ansible & dependencies
 
@@ -147,26 +131,26 @@ Go to *Extensions* and search for *redhat.ansible*. Use the extension from *Red 
 ??? info "What do I need this extension for and what changed?"
     This extension adds some cool features to VSCode that are purely ansible specific and need `ansible` and `ansible-lint` on your remote host to work.
 
-    If VSCode identifies your file as an "Ansible" file it will change it behaviour. You can check this on the right side of your `Status Bar` at the bottom. `.yml` and `.yaml` files should be identified as YAML Language. Which is correct but we want to change that behaviour to be even "more" correct.
+    If VSCode identifies your file as an "Ansible" file it will change its behaviour. You can check this on the right side of your `Status Bar` at the bottom. `.yml` and `.yaml` files should be identified as YAML Language. Which is correct but we want to change that behaviour to be even "more" correct.
     
     ![Language Settings on Default](vscode-status-bar-language-settings.png)
 
-    Click on `YAML`. VSCode opens a dialog at the top. Select `Configure File Association for '.yml'`. Then select Ansible.
+    Click on `YAML` in the `Status Bar`. VSCode opens a dialog at the top. Select `Configure File Association for '.yml'`. Then select Ansible.
 
     ![Language Settings on Default](vscode-language-settings-change.png)
     ![Language Settings on Default](vscode-language-settings-change-2.png)
 
-    The language in the `Status Bar` should look like this:
+    The language in the `Status Bar` should now look like this:
 
     ![Language Settings on Default](vscode-language-settings-ansible.png)
 
 
     !!! info "For more information read the official instructions, please" 
     
-        [Ansible Extension Information](https://marketplace.visualstudio.com/items?itemName=redhat.ansible){:target="_blank"} for this extension if you want to leverage it's features
+        [Ansible Extension Information](https://marketplace.visualstudio.com/items?itemName=redhat.ansible){:target="_blank"} 
 
 
-## Configure Azure DevOps
+## Configure Azure DevOps and Git
 
 In Azure DevOps code is stored in *repositories*. These repositories on the other hand are kept in a *project*. Every project can have multiple repositories.
 
@@ -208,7 +192,22 @@ In the terminal of the dev node, paste the content with a right-click after typi
 git clone https://******@dev.azure.com/******/******/_git/Ansible-Workshop-******
 ```
 
-Change into the directory (with `cd`) and you are done for now!
+Change into the directory (with `cd`).
+
+To work and interact with Git, we will need to configure it slightly. Run the following commands:
+
+```bash
+git config --global user.name "FirstName LastName"
+```
+
+```bash
+git config --global user.email firstNameLastName@beiersdorf.com
+```
+
+!!! warning
+    These are only examples, use your real Name and E-Mail address!  
+    This is used to identify, who made the code changes, which is fundamental for collaborative work on your Ansible playbooks.
+
 
 ## Login to AAP
 
