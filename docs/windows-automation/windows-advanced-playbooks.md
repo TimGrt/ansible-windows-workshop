@@ -104,6 +104,12 @@ Add a new task called **install IIS**. After writing the playbook, click `File` 
       notify: restart iis service
 ```
 
+??? question "Did you spot that we used two different Ansible collections?"
+    This is not an error, the Windows modules are stored in two collections, `ansible.windows` and `community.windows`.  
+    Which may seem odd, but this makes sense (if know about the background).  
+    The modules in the `ansible.windows` collection are *certified* by Red Hat, if any bugs happen in those modules, Red Hat will fix them as part of the AAP subscription.  
+    The modules in the `community.windows` collection are *community-maintained*, bug fixes must come from Open Source contributors (which are as fast or even faster than Red Hat itself). As development is much fast in the Open Source community, this collections has even more modules than the other Windows collection!
+
 ![site.yml part 1](images/5-vscode-iis-yaml.png)
 
 !!! info "What is happening here!?"
@@ -178,11 +184,9 @@ not escape the forward slash.
 
 !!! info "So… what did I just write?"
 
-    * `win_firewall_rule:` This module is used to create, modify, and update firewall rules. Note in the case of AWS there are also security group rules which may impact communication. We’ve opened
-     these for the ports in this example.
+    * `win_firewall_rule:` This module is used to create, modify, and update firewall rules. 
     * `win_template:` This module specifies that a jinja2 template is being used and deployed.
-    * `loop:` used in Ansible to transform data inside a template expression,
-     i.e. filters.
+    * `loop:` used in Ansible to run a task multiple times. Expects a list, which can be provided directly (as in the last task) or in a variable.
     * `debug:` Again, like in the `iis_basic` playbook, this task displays the URLs to access the sites we are creating for this exercise.
 
 ## Step 4 - Define and Use Handlers
@@ -190,8 +194,7 @@ not escape the forward slash.
 There are any number of reasons we often need to restart a
 service/process including the deployment of a configuration file,
 installing a new package, etc. There are really two parts to this
-Section; adding a handler to the playbook and calling the handler after
-the a task. We will start with the former.
+Section; adding a handler to the playbook and calling the handler after a task. We will start with the former.
 
 The `handlers` block should start after a one-level indentation, that
 is, two spaces. It should align with the `tasks` block.
@@ -217,6 +220,7 @@ is, two spaces. It should align with the `tasks` block.
       Quite the reveal, we know. You already noticed that you’ve added a
       `notify` statement to the `win_iis_website` task, now you know
       why.
+    * the order of `tasks` and `handlers` is not important, you could define Handlers above the tasks. Ansible knows what to do with both of them.
 
 ## Step 5 - Commit and Review
 
@@ -245,8 +249,8 @@ intended. If not, now is the time for us to fix it up. The playbook below should
 
 ```yaml
 ---
-- hosts: windows
-  name: This is a play within a playbook
+- name: This is a play within a playbook
+  hosts: windows
   vars:
     iis_sites:
       - name: 'Ansible Playbook Test'
@@ -304,7 +308,7 @@ intended. If not, now is the time for us to fix it up. The playbook below should
 
   handlers:
     - name: restart iis service
-      win_service:
+      ansible.windows.win_service:
         name: W3Svc
         state: restarted
         start_mode: auto
@@ -325,19 +329,27 @@ To test this playbook, we need to create a new Job Template to run this
 playbook. So go to *Template* and click *Add* and select `Job Template`
 to create a second job template.
 
-Complete the form using the following values:
+Complete the form using the following values, replace *username* as before.:
 
-| Key                   | Value                                           | Note |
-| --------------------- | ----------------------------------------------- | ---- |
-| Name                  | IIS Advanced                                    |      |
-| Description           | Template for iis_advanced                       |      |
-| Job Type              | Run                                             |      |
-| Inventory             | Workshop Inventory                              |      |
-| Execution Environment | windows workshop execution environment          |      |
-| Project               | Ansible Workshop Project                        |      |
-| Playbook              | `iis_advanced/site.yml`                         |      |
-| Credentials           | Workshop Credential                             |      |
-| Options               | :material-checkbox-outline: Enable Fact Storage |      |
+!!! danger
+    Your playbook targets the `windows` group. We have **all** test hosts in the inventory `Workshop Example CC`, you **must** place a limit on your job template!
+    If you target the complete *windows* group, you will automate **all** hosts, even those of your colleagues!
+
+| Key                   | Value                                           | Note                                     |
+| --------------------- | ----------------------------------------------- | ---------------------------------------- |
+| Name                  | IIS Advanced *username*                         |                                          |
+| Description           | Template for iis_advanced                       |                                          |
+| Job Type              | Run                                             |                                          |
+| Inventory             | Workshop Example CC                             |                                          |
+| Project               | Ansible Workshop Project *username*             |                                          |
+| Execution Environment | BSS EE - Windows                                |                                          |
+| Playbook              | `iis_advanced/site.yml`                         |                                          |
+| Credentials           | Azure DevOps *username*                         |                                          |
+| Limit                 | *Your single host as in your local inventory!*  | Do **not** target the **windows** group! |
+| Options               | :material-checkbox-outline: Enable Fact Storage |                                          |
+
+!!! danger
+    Did you set the `limit`?
 
 Click SAVE ![Save](images/at_save.png) and on the following page, select the **Survey** tab.
 
@@ -363,7 +375,7 @@ Now let’s run it and see how it works.
 Select TEMPLATES.
 
 !!! note
-  Alternatively, if you haven’t navigated away from the job templates creation page, you can scroll down to see all existing job templates
+    Alternatively, if you haven’t navigated away from the job templates creation page, you can scroll down to see all existing job templates.
 
 Click the rocketship icon ![Add](images/at_launch_icon.png) for the **IIS Advanced** Job Template.
 

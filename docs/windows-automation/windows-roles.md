@@ -260,7 +260,7 @@ Right-click `roles\iis_simple\templates` and create a new file called `index.htm
 
 Now, remember we still have a *templates* folder at the base level of this playbook, so we will delete that now. Right click it and Select *Delete*.
 
-## Step 7 - Commit
+## Step 6 - Commit
 
 Click `File` :material-arrow-right: `Save All` to ensure all your files are saved.
 
