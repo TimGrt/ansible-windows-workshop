@@ -16,7 +16,7 @@ Starting at this task we are going to use Visual Studio Code as our editor. In a
 
 ## Step 1: Create directory structure
 
-There is a [best practice](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html){:target="_blank"} on the preferred directory structures for playbooks. We strongly encourage you to read and understand these practices as you develop your Ansible skills. That said, our playbook today is very basic and a complex directory structure is not necessary.
+There is a [best practice](https://docs.ansible.com/ansible/latest/tips_tricks/sample_setup.html#sample-directory-layout){:target="_blank"} on the preferred directory structures for playbooks. We strongly encourage you to read and understand these practices as you develop your Ansible skills. That said, our playbook today is very basic and a complex directory structure is not necessary.
 
 Instead, we are going to create a very simple directory structure for our playbook, and add just a couple of files.
 
@@ -29,7 +29,7 @@ Open Visual Studio Code on the remote host and select your git repository as fol
 `install_iis.yml`
 
 ``` { .bash .no-copy }
-[student@ansible-1 ansible-files]$ mkdir iis_basic
+[adm1schmidtjon@HAMS010784]$ mkdir iis_basic
 ```
 
 You can also do this with VS Code.  
@@ -63,23 +63,23 @@ If you want to see the entire playbook for reference, skip to the bottom of this
 ```yaml
   tasks:
     - name: Install iis
-      community.windows.win_feature:
+      ansible.windows.win_feature:
         name: Web-Server
         state: present
 
     - name: Start iis service
-      community.windows.win_service:
+      ansible.windows.win_service:
         name: W3Svc
         state: started
 
     - name: Create website index.html
-      community.windows.win_copy:
+      ansible.windows.win_copy:
         content: "{{ iis_test_message }}"
         dest: C:\Inetpub\wwwroot\index.html
 
     - name: Show website address
       ansible.builtin.debug:
-        msg: "Open an RDP session and open http://localhost in a browser."
+        msg: "Open an RDP session and open http://{{ ansible_host }} in a browser."
 ```
 
 * `tasks:` This denotes that one or more tasks are about to be defined
@@ -90,7 +90,7 @@ If you want to see the entire playbook for reference, skip to the bottom of this
     When ommiting the `name` parameter, your playbook only will output that it does something with the `ansible.windows.win_feature` module, but not what it does exactly.
 
 ```yaml
-    community.windows.win_feature:
+    ansible.windows.win_feature:
       name: Web-Server
       state: present
 ```
@@ -98,7 +98,7 @@ If you want to see the entire playbook for reference, skip to the bottom of this
 These three lines are calling the Ansible module **`win_feature`** to install the IIS Web Server. [Click here](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_feature_module.html){:target="_blank"} to see all options for the `win_feature` module.
 
 ```yaml
-    community.windows.win_service:
+    ansible.windows.win_service:
       name: W3Svc
       state: started
 ```
@@ -106,7 +106,7 @@ These three lines are calling the Ansible module **`win_feature`** to install th
 The next few lines are using the ansible module **win_service** to start the IIS service. The `win_service` module is the preferred way of controlling services on remote hosts. [Click here](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_service_module.html){:target="_blank"} to learn more about the **`win_service`** module.
 
 ```yaml
-    community.windows.win_copy:
+    ansible.windows.win_copy:
       content: "{{ iis_test_message }}"
       dest: C:\Inetpub\wwwroot\index.html
 ```
@@ -115,7 +115,7 @@ In this task, we use the `win_copy` module to create a file with specific conten
 
 ```yaml
     ansible.builtin.debug:
-      msg: "Open an RDP session and open http://localhost in a browser."
+      msg: "Open an RDP session and open http://{{ ansible_host }} in a browser."
 ```
 
 This task uses the `debug` module to post a message at the end of playbook execution.
@@ -142,20 +142,26 @@ And that should do it. You should now have a fully written playbook called `inst
     Add the file (to the *local staging* area).
 
     ```bash
-    [student@ansible-1 ansible-files]$ git add install_iis.yml
+    [adm1schmidtjon@HAMS010784]$ git add iis_basic/install_iis.yml
+    ```
+
+    Or if you already in the created folder just the filename
+
+    ```bash
+    [adm1schmidtjon@HAMS010784]$ git add install_iis.yml
     ```
 
     *Commit* the change with a short message.  
     This message is intended to describe the changes you made so that others (including yourself) better understand what is changing when comparing versions.
 
     ```bash
-    [student@ansible-1 ansible-files]$ git commit -m "Adding install_iis.yml playbook."
+    [adm1schmidtjon@HAMS010784]$ git commit -m "Adding install_iis.yml playbook."
     ```
 
     Now you need to push the committed changes to your repository.
 
     ```bash
-    [student@ansible-1 ansible-files]$ git push
+    [adm1schmidtjon@HAMS010784]$ git push
     ```
 
 === "VS Code"
@@ -178,9 +184,8 @@ And that should do it. You should now have a fully written playbook called `inst
 
     ![Git Push Origin](images/3-vscode-push-initial-pop-up.png)
 
-    If you’re interested in validating the code is in git, you can connect to GitLab to verify. Go back to the workshop page, and click the link under **GitLab Access** taking note of your username and password.
+    If you’re interested in validating the code is in git, you can connect to Azure DevOps to verify.
 
-    ![GitLab access](images/3-vscode-gitlab-access.png)
 
 You are ready to automate!
 
@@ -211,5 +216,5 @@ You are ready to automate!
 
     - name: Show website address
       ansible.builtin.debug:
-        msg: "Open an RDP session and open http://localhost in a browser."
+        msg: "Open an RDP session and open http://{{ ansible_host }} in a browser."
 ```
