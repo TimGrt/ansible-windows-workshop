@@ -8,7 +8,7 @@ MD026: false
 
 # MD033/no-inline-html - Inline HTML
 MD033:
-  allowed_elements: [figure, figcaption]
+  allowed_elements: [figure, figcaption, br]
 
 # MD034/no-bare-urls - Bare URL used
 MD034: false

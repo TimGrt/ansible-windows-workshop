@@ -68,7 +68,7 @@ Host Ansible-Dev-Node
 
 After saving, if the new SSH target does not show up, click the :fontawesome-solid-arrow-rotate-right: *Refresh* button when hovering above the *Remote* tab.
 
-Do a *right-click* on the SSH target *Ansible-Dev-Node* and choose *Connect in current window...*. You will be asked two questions, what kind of platform the target node is (choose `Linux`), afterwards input your password. On the first connection you need to enter your password multiple times. 
+Do a *right-click* on the SSH target *Ansible-Dev-Node* and choose *Connect in current window...*. You will be asked two questions, what kind of platform the target node is (choose `Linux`), afterwards input your password. On the first connection you need to enter your password multiple times.
 
 <figure markdown>
   ![VScode Remote SSH connection](VScodeRemoteSSHconnection.png)
@@ -86,7 +86,6 @@ Give it some time for installing the VScode plugin (in `~/.vscode-server`), a su
   ![VScode Remote SSH connection](vscode-connected-remote-ssh.png)
   <figcaption>VScode Remote SSH connected</figcaption>
 </figure>
-
 
 ### Configure Git
 
@@ -164,7 +163,6 @@ Go to *Extensions* and search for *redhat.ansible*. Use the extension from *Red 
     !!! info "For more information read the official instructions, please" 
     
         [Ansible Extension Information](https://marketplace.visualstudio.com/items?itemName=redhat.ansible){:target="_blank"} for this extension if you want to leverage it's features
-
 
 ## Configure Azure DevOps
 

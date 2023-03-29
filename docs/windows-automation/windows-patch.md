@@ -1,4 +1,4 @@
-# 5 - Automated Patching
+# 5 - Optional: Automated Patching
 
 The `win_updates` module is used to either check for or to install Windows Updates. The module utilizes the built in Windows Update service to function. This means that you still will need a backend system like WSUS or the online Windows Update Servers to download updates from. If your server’s Windows Update configuration is set to automatically download but not install, you can also utilize the module to stage updates by telling it to `search` for updates. We also have the ability to whitelist or blacklist updates. For example we could tell it to only install one particular security update instead of every update available.
 
@@ -86,19 +86,25 @@ Next we need to create a new Job Template to run this playbook. So go to *Templa
 
 Complete the form using the following values:
 
-| Key                | Value                                         | Note |
-| ------------------ | --------------------------------------------- | ---- |
-| NAME               | Windows Updates                               |      |
-| DESCRIPTION        |                                               |      |
-| JOB TYPE           | Run                                           |      |
-| INVENTORY          | Workshop Inventory                            |      |
-| PROJECT            | Ansible Workshop Project                      |      |
-| Playbook           | `win_updates/site.yml`                        |      |
-| MACHINE CREDENTIAL | Student Account                               |      |
-| LIMIT              | windows                                       |      |
-| OPTIONS            | :material-checkbox-outline: ENABLE FACT CACHE |      |
+!!! danger
+    Your playbook targets the `windows` group. We have **all** test hosts in the inventory `Workshop Example CC`, you **must** place a limit on your job template!
+    If you target the complete *windows* group, you will automate **all** hosts, even those of your colleagues!
 
-![Create Job Template](images/7-win_update-template.png)
+| Key                   | Value                                           | Notes                                    |
+| --------------------- | ----------------------------------------------- | ---------------------------------------- |
+| Name                  | Windows Updates *username*                      |                                          |
+| Description           | Template for Windows updates                    |                                          |
+| Job Type              | Run                                             |                                          |
+| Inventory             | Workshop Inventory                              |                                          |
+| Project               | Ansible Workshop Project *username*             |                                          |
+| Execution Environment | BSS EE - Windows                                |                                          |
+| Playbook              | `win_updates/site.yml`                          |                                          |
+| Credentials           | Azure DevOps *username*                         |                                          |
+| Limit                 | *Your single host as in your local inventory!*  | Do **not** target the **windows** group! |
+| Options               | :material-checkbox-outline: Enable Fact Storage |                                          |
+
+!!! danger
+    Did you set the `limit`?
 
 Click SAVE ![Save](images/at_save.png) and then select ADD SURVEY
 ![Add](images/at_add_survey.png)
@@ -132,9 +138,7 @@ Once complete, click the ADD ![Add](images/at_add.png) button. You will see your
 
 ![Reboot Survey Form](images/7-reboot-survey.png)
 
-Select ADD ![Add](images/at_add.png).
-
-Select SAVE ![Add](images/at_save.png).
+Select ADD ![Add](images/at_add.png), then select SAVE ![Add](images/at_save.png).
 
 Back on the main Job Template page, select SAVE ![Add](images/at_save.png) again.
 

@@ -24,7 +24,6 @@ Open Visual Studio Code on the remote host and select your git repository as fol
 
 ![Our Git Repository](images/3-vscode-workspace.png)
 
-
 **Step 2:** Create a directory called `iis_basic` and a file called
 `install_iis.yml`
 
@@ -185,7 +184,6 @@ And that should do it. You should now have a fully written playbook called `inst
     ![Git Push Origin](images/3-vscode-push-initial-pop-up.png)
 
     If you’re interested in validating the code is in git, you can connect to Azure DevOps to verify.
-
 
 You are ready to automate!
 

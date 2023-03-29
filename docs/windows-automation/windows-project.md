@@ -39,20 +39,27 @@ Click the ![Add](add.png) icon, and select Job Template.
 
 Complete the form using the following values, replace *username* with your username abbreviation:
 
-| Key                   | Value                                           |
-| --------------------- | ----------------------------------------------- |
-| Name                  | IIS Basic Job Template *username*               |
-| Description           | Template for the iis-basic playbook             |
-| JOB TYPE              | Run                                             |
-| INVENTORY             | Workshop Inventory *username*                   |
-| PROJECT               | Ansible Workshop Project *username*             |
-| Execution Environment | BSS EE - Windows                                |
-| PLAYBOOK              | `iis_basic/install_iis.yml`                     |
-| CREDENTIAL            | Name: **Windows Credential**                    |
-| LIMIT                 | windows                                         |
-| OPTIONS               | :material-checkbox-outline: ENABLE FACT STORAGE |
+!!! danger
+    Your playbook targets the `windows` group. We have **all** test hosts in the inventory `Workshop Example CC`, you **must** place a limit on your job template!
+    If you target the complete *windows* group, you will automate **all** hosts, even those of your colleagues!
+
+| Key                   | Value                                           | Notes                                    |
+| --------------------- | ----------------------------------------------- | ---------------------------------------- |
+| Name                  | IIS Basic Job Template *username*               |                                          |
+| Description           | Template for the iis-basic playbook             |                                          |
+| Job Type              | Run                                             |                                          |
+| Inventory             | Workshop Inventory                              |                                          |
+| Project               | Ansible Workshop Project *username*             |                                          |
+| Execution Environment | BSS EE - Windows                                |                                          |
+| Playbook              | `iis_basic/install_iis.yml`                     |                                          |
+| Credentials           | Azure DevOps *username*                         |                                          |
+| Limit                 | *Your single host as in your local inventory!*  | Do **not** target the **windows** group! |
+| Options               | :material-checkbox-outline: Enable Fact Storage |                                          |
 
 ![Create Job Template](images/4-create-job-template.png)
+
+!!! danger
+    Did you set the `limit`?
 
 Click SAVE ![Save](images/at_save.png).
 
