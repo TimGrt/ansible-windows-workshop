@@ -197,18 +197,18 @@ You are ready to automate!
   hosts: windows
 
   tasks:
-    - name: install iis
-      community.windows.win_feature:
+    - name: Install iis
+      ansible.windows.win_feature:
         name: Web-Server
         state: present
 
-    - name: start iis service
-      community.windows.win_service:
+    - name: Start iis service
+      ansible.windows.win_service:
         name: W3Svc
         state: started
 
     - name: Create website index.html
-      community.windows.win_copy:
+      ansible.windows.win_copy:
         content: "{{ iis_test_message }}"
         dest: C:\Inetpub\wwwroot\index.html
 

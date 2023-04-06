@@ -72,7 +72,7 @@ Complete the survey form with following values
 
 | Key                    | Value                                                      | Note             |
 |------------------------|------------------------------------------------------------|------------------|
-| PROMPT                 | Please enter a test message for your new website           |                  |
+| QUESTION               | Please enter a test message for your new website           |                  |
 | DESCRIPTION            | Website test message prompt                                |                  |
 | ANSWER VARIABLE NAME   | `iis_test_message`                                         |                  |
 | ANSWER TYPE            | Text                                                       |                  |
