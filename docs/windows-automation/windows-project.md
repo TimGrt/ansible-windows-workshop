@@ -52,7 +52,7 @@ Complete the form using the following values, replace *username* with your usern
 | Project               | Ansible Workshop Project *username*             |                                          |
 | Execution Environment | BSS EE - Windows                                |                                          |
 | Playbook              | `iis_basic/install_iis.yml`                     |                                          |
-| Credentials           | Azure DevOps *username*                         |                                          |
+| Credentials           | Windows Test Host *username*                        |                                          |
 | Limit                 | *Your single host as in your local inventory!*  | Do **not** target the **windows** group! |
 | Options               | :material-checkbox-outline: Enable Fact Storage |                                          |
 
