@@ -144,7 +144,7 @@ for creating your template. Enter the following details:
 <body>
 
   <p align=center><img src='http://docs.ansible.com/images/logo.png' align=center>
-  <h1 align=center>{{ ansible_hostname }} --- {{ iis_test_message }}</h1>
+  <h1 align=center>{{ ansible_host }} --- {{ iis_test_message }}</h1>
 
 </body>
 </html>
