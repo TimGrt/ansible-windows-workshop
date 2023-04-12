@@ -1,0 +1,1344 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../preparation/">
+      
+      
+        <link rel="next" href="../windows-playbook/">
+      
+      <link rel="icon" href="../../assets/images/ansible-logo-black.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>1 - Ad-hoc commands - Ansible Workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site-enum-headings1.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-enum-headings2.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-enum-headings3.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-enum-headings4.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-enum-headings5.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-enum-headings6.css">
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/tables.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="computacenter" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-ad-hoc-commands" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <!-- Add announcement here, including arbitrary HTML -->
+  <!-- <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 14.25 14H8.061l-2.574 2.573A1.458 1.458 0 0 1 3 15.543V14H1.75A1.75 1.75 0 0 1 0 12.25v-9.5C0 1.784.784 1 1.75 1ZM1.5 2.75v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Z"/><path d="M22.5 8.75a.25.25 0 0 0-.25-.25h-3.5a.75.75 0 0 1 0-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 22.25 20H21v1.543a1.457 1.457 0 0 1-2.487 1.03L15.939 20H10.75A1.75 1.75 0 0 1 9 18.25v-1.465a.75.75 0 0 1 1.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 0 1 .53.22l2.72 2.72v-2.19a.75.75 0 0 1 .75-.75h2a.25.25 0 0 0 .25-.25v-9.5Z"/></svg></span> &nbsp;Die aktuelle URL zur Demo-Umgebung: http://9883.example.com -->
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../.." title="Ansible Workshop" class="md-header__button md-logo" aria-label="Ansible Workshop" data-md-component="logo">
+      
+  <img src="../../assets/images/ansible-logo-black.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ansible Workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 - Ad-hoc commands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="computacenter" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TimGrt/ansible-windows-workshop" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    timgrt/ansible-windows-workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Ansible Workshop" class="md-nav__button md-logo" aria-label="Ansible Workshop" data-md-component="logo">
+      
+  <img src="../../assets/images/ansible-logo-black.png" alt="logo">
+
+    </a>
+    Ansible Workshop
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TimGrt/ansible-windows-workshop" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    timgrt/ansible-windows-workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../..">Workshop Overview</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Workshop Overview
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../preparation/" class="md-nav__link">
+        Preparation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Exercises
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Exercises
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          1 - Ad-hoc commands
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1 - Ad-hoc commands
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-test-connection" class="md-nav__link">
+    Step 1 - Test connection
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1 - Test connection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-11-on-cli" class="md-nav__link">
+    Step 1.1 - On CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-12-in-aap" class="md-nav__link">
+    Step 1.2 - In AAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-get-infos-about-target" class="md-nav__link">
+    Step 2 - Get infos about target
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2 - Get infos about target">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-21-on-cli" class="md-nav__link">
+    Step 2.1 - On CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-22-in-aap" class="md-nav__link">
+    Step 2.2 - In AAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-run-ps-command" class="md-nav__link">
+    Step 3 - Run PS command
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3 - Run PS command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-31-on-cli" class="md-nav__link">
+    Step 3.1 - On CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-32-in-aap" class="md-nav__link">
+    Step 3.2 - In AAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-result" class="md-nav__link">
+    End Result
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-playbook/" class="md-nav__link">
+        2 - Writing playbooks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-project/" class="md-nav__link">
+        3 - Sync Project to AAP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-advanced-playbooks/" class="md-nav__link">
+        4 - Advanced playbook concepts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-patch/" class="md-nav__link">
+        5 - Optional: Automated Patching
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preparation" class="md-nav__link">
+    Preparation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-test-connection" class="md-nav__link">
+    Step 1 - Test connection
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1 - Test connection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-11-on-cli" class="md-nav__link">
+    Step 1.1 - On CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-12-in-aap" class="md-nav__link">
+    Step 1.2 - In AAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-get-infos-about-target" class="md-nav__link">
+    Step 2 - Get infos about target
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2 - Get infos about target">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-21-on-cli" class="md-nav__link">
+    Step 2.1 - On CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-22-in-aap" class="md-nav__link">
+    Step 2.2 - In AAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-run-ps-command" class="md-nav__link">
+    Step 3 - Run PS command
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3 - Run PS command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-31-on-cli" class="md-nav__link">
+    Step 3.1 - On CLI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-32-in-aap" class="md-nav__link">
+    Step 3.2 - In AAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-result" class="md-nav__link">
+    End Result
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+    <a href="../../print_page/" title="Print Site" class="md-content__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5v1m5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5v3m4-3H17v1h1.5V13H17v2h-1.5V9h3v1.5m-6.5 0h1v3h-1v-3m-5 0h1v1H7v-1Z"/></svg>
+    </a>
+
+
+
+                  
+
+
+<h1 id="1-ad-hoc-commands">1 - Ad-hoc commands</h1>
+<p>For our first exercise, we are going to run some ad-hoc commands to help you get a feel for how Ansible works. Ansible ad-hoc commands enable you to perform tasks on remote nodes without having to write a playbook. They are very useful when you simply need to do one or two things quickly, to many remote nodes.</p>
+<p>Ad-hoc commands can be run on the command line and with the Ansible Automation Platform.
+We will try both ways and switch between running ad-hoc commands on the CLI and in the AAP.</p>
+<h2 id="preparation">Preparation</h2>
+<p>Ensure that you are in your project folder and that you can run the Ansible CLI utility, run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>status
+</code></pre></div>
+<p>If you get the message <code>fatal: not a git repository</code> you are not in the correct folder. In the correct folder expect this line: <code>nothing to commit, working tree clean</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ansible<span class="w"> </span>--version
+</code></pre></div>
+<p>The output looks something like this:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">[</span>student@ansible-1<span class="w"> </span>workshop_project<span class="o">]</span>$<span class="w"> </span>ansible<span class="w"> </span>--version
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ansible<span class="w"> </span><span class="o">[</span>core<span class="w"> </span><span class="m">2</span>.14.0<span class="o">]</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>config<span class="w"> </span><span class="nv">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/etc/ansible/ansible.cfg
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>configured<span class="w"> </span>module<span class="w"> </span>search<span class="w"> </span><span class="nv">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;/home/student/.ansible/plugins/modules&#39;</span>,<span class="w"> </span><span class="s1">&#39;/usr/share/ansible/plugins/modules&#39;</span><span class="o">]</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>ansible<span class="w"> </span>python<span class="w"> </span>module<span class="w"> </span><span class="nv">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/usr/lib/python3.9/site-packages/ansible
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>ansible<span class="w"> </span>collection<span class="w"> </span><span class="nv">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/home/student/.ansible/collections:/usr/share/ansible/collections
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span>executable<span class="w"> </span><span class="nv">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/usr/bin/ansible
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span>python<span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>.9.13<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Nov<span class="w">  </span><span class="m">9</span><span class="w"> </span><span class="m">2022</span>,<span class="w"> </span><span class="m">13</span>:16:24<span class="o">)</span><span class="w"> </span><span class="o">[</span>GCC<span class="w"> </span><span class="m">8</span>.5.0<span class="w"> </span><span class="m">20210514</span><span class="w"> </span><span class="o">(</span>Red<span class="w"> </span>Hat<span class="w"> </span><span class="m">8</span>.5.0-15<span class="o">)]</span><span class="w"> </span><span class="o">(</span>/usr/bin/python3.9<span class="o">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span>jinja<span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>.1.2
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="nv">libyaml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+</code></pre></div>
+<p>The output gives some useful informations, the most important one are these:</p>
+<ul>
+<li><code>config file = /etc/ansible/ansible.cfg</code> - The currently used configuration file for Ansible</li>
+<li><code>python version = 3.9.13</code> - The Python interpreter used on the Controller (there may be multiple Python version installed...)</li>
+</ul>
+<p>Don't worry if your <code>ansible --version</code> command outputs <code>config file = None</code>, you will not need one currently.</p>
+<details class="example">
+<summary>Let's take a look at an <strong>example</strong> Ansible configuration.</summary>
+<p>This is an example configuration from a different Ansible controller.</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">[</span>student@ansible-1<span class="w"> </span>workshop_project<span class="o">]</span>$<span class="w"> </span>cat<span class="w"> </span>/etc/ansible/ansible.cfg<span class="w"> </span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="o">[</span>defaults<span class="o">]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">stdout_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yaml
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nv">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>smart
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nv">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nv">deprecation_warnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nv">action_warnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nv">system_warnings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="nv">devel_warning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nv">host_key_checking</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nv">collections_on_ansible_version_mismatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ignore
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="nv">retry_files_enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="nv">interpreter_python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>auto_silent
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nv">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/home/student/lab_inventory/hosts
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="o">[</span>persistent_connection<span class="o">]</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="nv">connect_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="nv">command_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span>
+</code></pre></div>
+</details>
+<h2 id="step-1-test-connection">Step 1 - Test connection</h2>
+<h3 id="step-11-on-cli">Step 1.1 - On CLI</h3>
+<p>Ansible needs to know which hosts are targeted for the automation, therefor all Ansible content development starts with defining a <em>inventory</em> and sorting your hosts into <em>groups</em> in it. For most use cases, a inventory in the <code>.ini</code> format is the easiest to work with. Let's create a simple inventory with a single group called <code>windows</code> and put your test host in it. Create a file <code>hosts.ini</code> (you could leave out the file extension, by default, Ansible asumes that the file is formated in the <em>ini</em> format).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>touch<span class="w"> </span>hosts.ini
+</code></pre></div>
+<p>Add the following inventory definition and variables:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[windows]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="na">NODEName</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">[windows:vars]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="na">ansible_connection</span><span class="o">=</span><span class="w"> </span><span class="s">winrm</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="na">ansible_winrm_transport</span><span class="o">=</span><span class="w"> </span><span class="s">kerberos</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="na">ansible_port</span><span class="o">=</span><span class="w"> </span><span class="s">5986</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="na">ansible_host</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;{{ inventory_hostname }}.global.bdfgroup.net&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="na">ansible_user</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Your User&quot;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Set the correct <code>NODEName</code>, as well as the correct value for <code>ansible_user</code>. Ask your trainer for assistance!</p>
+</div>
+<p>The inventory file is in <code>.ini</code> format, this is one of the possible formats the inventory can be provided. Ansible itself parses the inventory and uses a JSON representation, let's take a look on how Ansible sees our inventory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ansible-inventory<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>--list
+</code></pre></div>
+<p>The command above outputs info about <strong>all</strong> hosts in the inventory, the groups in which every host is in and which variables (mostly connection variables) are defined for every host. The <code>ansible-inventory</code> utility has more functionality, use the <code>--help</code> parameter.</p>
+<details class="info">
+<summary>Save some time and leave out some parameters?</summary>
+<p>You need to provide the path to your inventory file with the <code>-i</code> (<code>--inventory</code>) parameter <strong>everytime</strong> when executing the command.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ansible-inventory<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>--list
+</code></pre></div>
+You can use the absolut or relative path.</p>
+<p>If you don't want to add <code>-i hosts.ini</code> everytime you run a command, you can specify it in an <code>ansible.cfg</code> file in your working directory.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>touch<span class="w"> </span>ansible.cfg
+</code></pre></div>
+Copy the following content into this file to customize ansible to your liking or per project needs.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># ansible.cfg file</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="o">[</span>defaults<span class="o">]</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>hosts.ini
+</code></pre></div>
+<p>Ansible now knows which inventory file should be used for your project, now you can run the command like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ansible-inventory<span class="w"> </span>--list
+</code></pre></div>
+</details>
+<p>All right, we have an inventory, let's test if we can reach our target node in the <em>windows</em> group. We will use the <code>ansible</code> utility to execute an <em>ad-hoc</em> command and will provide the <code>ansible.windows.win_ping</code> module. The <code>win_ping</code> module makes sure our windows hosts are responsive. This is not a traditional (ICMP) <em>ping</em>, but actually verifying both connectivity and authentication to the host.</p>
+<p>Execute the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>windows<span class="w"> </span>-m<span class="w"> </span>ansible.windows.win_ping
+</code></pre></div>
+<p>The ad-hoc command expects a group to target (here it is the <em>windows</em> group) and a module with optional arguments.</p>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Well, this didn't went well, we encountered an error.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>The<span class="w"> </span>module<span class="w"> </span>ansible.windows.win_ping<span class="w"> </span>was<span class="w"> </span>not<span class="w"> </span>found<span class="w"> </span><span class="k">in</span><span class="w"> </span>configured<span class="w"> </span>module<span class="w"> </span>paths
+</code></pre></div>
+</div>
+<p>The module was not found, let's see which collections are installed (this is the place where modules are stored).</p>
+<details class="info">
+<summary>Additional infos to modules and collections</summary>
+<p>Ansible modules are units of code that can control system resources or execute system commands. Ansible provides a module library that you can execute directly on remote hosts or through playbooks. Modules (and much more) are stored in <em>Collections</em>, these are a distribution format for Ansible content.<br />
+Take a look at the Ansible documentation if you need further information:</p>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/module_plugin_guide/modules_intro.html" target="_blank">Introduction to modules</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections_guide/index.html" target="_blank">Using Ansible collections</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/index.html" target="_blank">Collection Index</a></li>
+</ul>
+</details>
+<p>Run the following command to list all installed collections:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>list
+</code></pre></div>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Another error, this one states that no collections (except the builtin collection <em>ansible.builtin</em>) are installed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ERROR!<span class="w"> </span>-<span class="w"> </span>None<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>provided<span class="w"> </span>paths<span class="w"> </span>were<span class="w"> </span>usable.<span class="w"> </span>Please<span class="w"> </span>specify<span class="w"> </span>a<span class="w"> </span>valid<span class="w"> </span>path<span class="w"> </span>with<span class="w"> </span>--collections-path
+</code></pre></div>
+</div>
+<p>Let's install the missing collection:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>ansible.windows
+</code></pre></div>
+<details class="tip">
+<summary>Got an <em>SSL:CERTIFICATE_VERIFY_FAILED</em> error?</summary>
+<p>If you see the following error:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$<span class="w"> </span>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>ansible.windows
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Starting<span class="w"> </span>galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>process
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Process<span class="w"> </span>install<span class="w"> </span>dependency<span class="w"> </span>map
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="o">[</span>WARNING<span class="o">]</span>:<span class="w"> </span>Skipping<span class="w"> </span>Galaxy<span class="w"> </span>server<span class="w"> </span>https://galaxy.ansible.com.<span class="w"> </span>Got<span class="w"> </span>an<span class="w"> </span>unexpected<span class="w"> </span>error<span class="w"> </span>when<span class="w"> </span>getting<span class="w"> </span>available<span class="w"> </span>versions<span class="w"> </span>of<span class="w"> </span>collection<span class="w"> </span>ansible.windows:<span class="w"> </span>Unknown<span class="w"> </span>error<span class="w"> </span>when<span class="w"> </span>attempting<span class="w"> </span>to<span class="w"> </span>call<span class="w"> </span>Galaxy<span class="w"> </span>at<span class="w"> </span><span class="s1">&#39;https://galaxy.ansible.com/api/&#39;</span>:<span class="w"> </span>&lt;urlopen<span class="w"> </span>error<span class="w"> </span><span class="o">[</span>SSL:
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>CERTIFICATE_VERIFY_FAILED<span class="o">]</span><span class="w"> </span>certificate<span class="w"> </span>verify<span class="w"> </span>failed:<span class="w"> </span>self-signed<span class="w"> </span>certificate<span class="w"> </span><span class="k">in</span><span class="w"> </span>certificate<span class="w"> </span>chain<span class="w"> </span><span class="o">(</span>_ssl.c:997<span class="o">)</span>&gt;
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>ERROR!<span class="w"> </span>Unknown<span class="w"> </span>error<span class="w"> </span>when<span class="w"> </span>attempting<span class="w"> </span>to<span class="w"> </span>call<span class="w"> </span>Galaxy<span class="w"> </span>at<span class="w"> </span><span class="s1">&#39;https://galaxy.ansible.com/api/&#39;</span>:<span class="w"> </span>&lt;urlopen<span class="w"> </span>error<span class="w"> </span><span class="o">[</span>SSL:<span class="w"> </span>CERTIFICATE_VERIFY_FAILED<span class="o">]</span><span class="w"> </span>certificate<span class="w"> </span>verify<span class="w"> </span>failed:<span class="w"> </span>self-signed<span class="w"> </span>certificate<span class="w"> </span><span class="k">in</span><span class="w"> </span>certificate<span class="w"> </span>chain<span class="w"> </span><span class="o">(</span>_ssl.c:997<span class="o">)</span>&gt;
+</code></pre></div>
+<p>Don't worry, you can add the <code>-c</code> (<code>--ignore-certs</code>) parameter, it instructs to ignore certificate validation errors.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>ansible-galaxy<span class="w"> </span>collection<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>ansible.windows
+</code></pre></div>
+</details>
+<p>Ok, looks good, try the ad-hoc command again.</p>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Another error?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>student1-win1<span class="w"> </span><span class="p">|</span><span class="w"> </span>FAILED!<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="s2">&quot;msg&quot;</span>:<span class="w"> </span><span class="s2">&quot;winrm or requests is not installed: No module named &#39;winrm&#39;&quot;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="o">}</span>
+</code></pre></div>
+</div>
+<p>A missing dependency, Ansible modules are (mostly) written in Python (or in Powershell for Windows), they sometimes need additional Python modules or libraries. Let's install the missing depedency:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>pywinrm<span class="w"> </span>--user
+</code></pre></div>
+<p>We installed the <code>pywinrm</code> Python module with the Python package manager for the Python version Ansible is running with, this is needed for the initial connection from the Ansible Controller to the target host.<br />
+Let's install another missing dependency:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>pywinrm<span class="o">[</span>kerberos<span class="o">]</span><span class="w"> </span>--user
+</code></pre></div>
+<p>This module is needed because of the configured WinRM transport method. If we would have run the ad-hoc command, the error message would have stated the missing package.</p>
+<p>Ok, one more try, run the ad-hoc command again.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>windows<span class="w"> </span>-m<span class="w"> </span>ansible.windows.win_ping
+</code></pre></div>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>What? Another error?? Host unreachable??</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>kerberos:<span class="w"> </span>authGSSClientInit<span class="o">()</span><span class="w"> </span>failed:<span class="w"> </span><span class="o">((</span><span class="s1">&#39;No credentials were supplied, or the credentials were unavailable or inaccessible&#39;</span>,<span class="w"> </span><span class="m">458752</span><span class="o">)</span>,<span class="w"> </span>...
+</code></pre></div>
+<p>Looks like we can't authenticate against the Windows target node.</p>
+</div>
+<p>Authentication of Ansible (or in effect, us) against the Windows target node needs a Kerberos ticket.<br />
+Do you remember the <code>ansible_user</code> variable in your inventory file? You referenced your personal (Admin) user there, we need to create a Kerberos ticket on the Ansible Dev Node for this one. Ansible uses this user to connect to the target node. </p>
+<p>Run the following command and input the password to authenticate your Admin-User:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kinit<span class="w"> </span>&lt;username&gt;
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Naturally, replace <code>&lt;username&gt;</code>.<br />
+Kerberos is picky when it comes to spelling and capitalization, you <strong>must</strong> use the exact spelling when issueing your Kerberos ticket as in the value of the <code>ansible_user</code> variable.</p>
+</div>
+<p>You can check if the ticket was granted and which principal is used with <code>klist</code>.</p>
+<p>Ok, one last try with the ad-hoc command!</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="o">[</span>student@ansible-1<span class="w"> </span>workshop_project<span class="o">]</span>$<span class="w"> </span>ansible<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>windows<span class="w"> </span>-m<span class="w"> </span>ansible.windows.win_ping
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>student1-win1<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">SUCCESS</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="s2">&quot;changed&quot;</span>:<span class="w"> </span>false,
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="s2">&quot;ping&quot;</span>:<span class="w"> </span><span class="s2">&quot;pong&quot;</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="o">}</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Finally, everything in place! We can connect <strong>and</strong> authenticate with our Windows target node.</p>
+</div>
+<p>One of the hardest parts in Ansible is, getting the initial communication working. With Windows this is especially true, when things like Kerberos come into play. But, you made it! From now on it should get easier.</p>
+<h3 id="step-12-in-aap">Step 1.2 - In AAP</h3>
+<p>After running the <em>ad-hoc</em> command on the command line, let's do it in the Automation Platform.</p>
+<p>As before, we will need an Inventory.</p>
+<p>Click <strong>Inventories</strong> on the left panel, and then click the name of our Inventory <strong>Workshop Inventory</strong>. Now that you are on the Inventory Details page, we will need to go select our Host. So click <strong>HOSTS</strong>.</p>
+<p>Next to each host is a checkbox. Check the box next to each host you want to run an ad-hoc Command on. Select the <strong>Run Command</strong> button.</p>
+<p><img alt="Run Command" src="../images/2-adhoc-run-command.png" /></p>
+<p>This will pop up the <strong>Execute Command</strong> window. From here is where we can run a single task against our hosts.</p>
+<p>Let’s start with something really basic - pinging a host.</p>
+<p>Fill out this form as follows</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Module</td>
+<td><code>win_ping</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments</td>
+<td></td>
+<td>Intentionally blank</td>
+</tr>
+<tr>
+<td>Limit</td>
+<td></td>
+<td>This should display the host you selected in the previous step</td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execution environment</td>
+<td>BSS EE - Windows</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Machine credential</td>
+<td>Windows Test Host <em>username</em></td>
+<td>Your personal Machine credential you created before</td>
+</tr>
+</tbody>
+</table>
+<p>Once you click <strong>LAUNCH</strong> you will be redirected to the Job log. Every job and action in Automation Controller is recorded and stored. These logs can also be exported automatically to another logging system such as Splunk or ELK.</p>
+<p>The output tab is shown by default. Any output generated by the task is displayed here.</p>
+<p><img alt="Win_Ping output" src="../images/2-adhoc-run-win_ping-output.png" /></p>
+<p>The details tab shows information on when the task was executed, by whom, with what credential and what hosts were affected.</p>
+<p><img alt="Win_Ping details" src="../images/2-adhoc-run-win_ping-details.png" /></p>
+<p>The results returned will be different depending on which module is used, as they all handle and deal with different data sets depending on the task. No matter which module is used, you will always see a color coded STATUS of either SUCCESS, FAILURE, CHANGED, or SKIPPING.</p>
+<h2 id="step-2-get-infos-about-target">Step 2 - Get infos about target</h2>
+<p>Ad-hoc commands are perfect to gather informations about your target system.</p>
+<h3 id="step-21-on-cli">Step 2.1 - On CLI</h3>
+<p>We will now take a look at your Windows node configuration. The <code>setup</code> module queries the remote host for various data and returns that data as Ansible facts. This data is useful to determine things such as operating system version, hardware configuration, among other data points. This can then be used in your playbook for all sorts of reasons such as determining whether a task should even run, or determining what the name of a package should be based upon the operating system version.</p>
+<p>The <code>setup</code> module will run automatically at the beginning of every playbook, unless configured not to, so that this data is always available to your playbook.</p>
+<p>Run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>windows<span class="w"> </span>-m<span class="w"> </span>ansible.windows.setup
+</code></pre></div>
+<p>You are seeing loads of useful informations and you can use every bit as variables in your playbooks later on!</p>
+<h3 id="step-22-in-aap">Step 2.2 - In AAP</h3>
+<p>After running the <em>ad-hoc</em> command to gather infos on the command line, let's do it again in the Automation Platform.</p>
+<p>You need to go back to <em>Inventories</em> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg></span> <em>Workshop Inventory</em> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg></span> <em>Hosts</em> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg></span> Activate Checkbox of Windows host <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg></span> Click <em>Run command</em>.<br />
+Lets go ahead and run the <code>setup</code> module to look at the output. Fill out the <strong>EXECUTE COMMAND</strong> form again with this info.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Module</td>
+<td><code>setup</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments</td>
+<td></td>
+<td>Intentionally blank</td>
+</tr>
+<tr>
+<td>Limit</td>
+<td></td>
+<td>This should display the host you selected in the previous step</td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execution environment</td>
+<td>BSS EE - Windows</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Machine credential</td>
+<td>Windows Test Host <em>username</em></td>
+<td>Your personal Machine credential you created before</td>
+</tr>
+</tbody>
+</table>
+<p>You should see output like this:</p>
+<p><img alt="Setup Log Details" src="../images/2-adhoc-run-setup-output.png" /></p>
+<p>(<strong>Note:</strong> If you click the three dots shown on line 21 in the above output, you will see all the facts returned by the <code>setup</code> module.)</p>
+<h2 id="step-3-run-ps-command">Step 3 - Run PS command</h2>
+<p>Now let’s see how we can run a PowerShell command and view the output using the <code>ansible.windows.win_shell</code> module.</p>
+<h3 id="step-31-on-cli">Step 3.1 - On CLI</h3>
+<p>You are getting more and more familiar with ad-hoc commands, now you need to provide additional arguments to the used Ansible module.  </p>
+<p>Run the following command to run the <code>Get-Service</code> Powershell command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>ansible<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>windows<span class="w"> </span>-m<span class="w"> </span>ansible.windows.win_shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;Get-Service&quot;</span>
+</code></pre></div>
+<p>The output looks something like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>student@ansible-1<span class="w"> </span>workshop_project<span class="o">]</span>$<span class="w"> </span>ansible<span class="w"> </span>-i<span class="w"> </span>hosts.ini<span class="w"> </span>windows<span class="w"> </span>-m<span class="w"> </span>ansible.windows.win_shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;Get-Service&quot;</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>student1-win1<span class="w"> </span><span class="p">|</span><span class="w"> </span>CHANGED<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">rc</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>&gt;&gt;
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>Status<span class="w">   </span>Name<span class="w">               </span>DisplayName<span class="w">                           </span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>------<span class="w">   </span>----<span class="w">               </span>-----------<span class="w">                           </span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>Running<span class="w">  </span>AmazonSSMAgent<span class="w">     </span>Amazon<span class="w"> </span>SSM<span class="w"> </span>Agent<span class="w">                      </span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>Stopped<span class="w">  </span>AppIDSvc<span class="w">           </span>Application<span class="w"> </span>Identity<span class="w">                  </span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>Stopped<span class="w">  </span>AppMgmt<span class="w">            </span>Application<span class="w"> </span>Management<span class="w">                </span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>Stopped<span class="w">  </span>AppReadiness<span class="w">       </span>App<span class="w"> </span>Readiness<span class="w">                         </span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>Stopped<span class="w">  </span>AppXSvc<span class="w">            </span>AppX<span class="w"> </span>Deployment<span class="w"> </span>Service<span class="w"> </span><span class="o">(</span>AppXSVC<span class="o">)</span><span class="w">     </span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>Stopped<span class="w">  </span>AWSLiteAgent<span class="w">       </span>AWS<span class="w"> </span>Lite<span class="w"> </span>Guest<span class="w"> </span>Agent<span class="w">                  </span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>Running<span class="w">  </span>BFE<span class="w">                </span>Base<span class="w"> </span>Filtering<span class="w"> </span>Engine<span class="w">                 </span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>Stopped<span class="w">  </span>BITS<span class="w">               </span>Background<span class="w"> </span>Intelligent<span class="w"> </span>Transfer<span class="w"> </span>Ser...
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>Running<span class="w">  </span>CertPropSvc<span class="w">        </span>Certificate<span class="w"> </span>Propagation<span class="w">               </span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>Stopped<span class="w">  </span>cfn-hup<span class="w">            </span>CloudFormation<span class="w"> </span>cfn-hup<span class="w">                </span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>Stopped<span class="w">  </span>ClipSVC<span class="w">            </span>Client<span class="w"> </span>License<span class="w"> </span>Service<span class="w"> </span><span class="o">(</span>ClipSVC<span class="o">)</span>
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>...
+</code></pre></div>
+<p>The output is not green anymore as before, but yellow, the output also states that something was <em>CHANGED</em>.<br />
+We do know that nothing changed, but for Ansible any command could be provided through Powershell, it can't predict what will happen or if the desired state is already reached. This is called <em>idempotency</em> and the <code>win_shell</code> (and <code>win_command</code>) module do not support this. All other Windows modules work idempotent, try to use these instead of <code>win_shell</code> or <code>win_command</code>.</p>
+<h3 id="step-32-in-aap">Step 3.2 - In AAP</h3>
+<p>You know the drill, go to the spot to run <em>ad-hoc</em> commands against the Windows target node.</p>
+<p>Let’s fill out the form again, but this time use the <code>win_shell</code> module to execute the <code>Get-Service</code> Powershell command.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Module</td>
+<td><code>win_shell</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments</td>
+<td><code>Get-Service</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Limit</td>
+<td></td>
+<td>This should display the host you selected in the previous step</td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execution environment</td>
+<td>BSS EE - Windows</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Machine credential</td>
+<td>Windows Test Host <em>username</em></td>
+<td>Your personal Machine credential you created before</td>
+</tr>
+</tbody>
+</table>
+<p>Launch the job and view the results. You will see that it returns a direct output of what the Powershell command returned. This data can be stored to a variable and directly parsed inside your Ansible playbook later on.</p>
+<p>And run it one more time with the <code>Get-Process</code> Powershell command.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Module</td>
+<td><code>win_shell</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Arguments</td>
+<td><code>Get-Process</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Limit</td>
+<td></td>
+<td>This should display the host you selected in the previous step</td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execution environment</td>
+<td>BSS EE - Windows</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Click the <strong>Next</strong> button</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Machine credential</td>
+<td>Windows Test Host <em>username</em></td>
+<td>Your personal Machine credential you created before</td>
+</tr>
+</tbody>
+</table>
+<p>The difference between <code>ansible.windows.win_shell</code> and <code>ansible.windows.win_command</code> is that <code>win_command</code> arguments will not be processed through the shell, so variables like <code>$env:HOME</code> and operations like <code>&lt;</code>, <code>&gt;</code>, <code>|</code>, and <code>;</code> will not work (use the <code>ansible.windows.win_shell</code> module if you need these features). The <code>ansible.windows.win_command</code> module is much more secure as it’s not affected by the user’s environment.</p>
+<h2 id="end-result">End Result</h2>
+<p>Ad-hoc commands may be useful to run once in a while. However, as automation continues to grow within an environment, they are used less often.</p>
+<p>As you saw, doing stuff on the command-line requires a lot more configuration and dependency handling. The AAP <em>abstracts</em> most of the stuff from you (e.g. by bundling all necessary dependencies in a container image). Still, development of Ansible content is done with Ansible on the Command-Line, you will get used to it, the more you try!</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When a task is performed on a Windows server, Ansible is smart enough to know whether a reboot is required after executing that task. The below is part of the output of the command to remove the IIS feature. The output of this task can be used in subsequent tasks, like whether or not to reboot before continuing.</p>
+</div>
+<p><img alt="Reboot required" src="../images/2-adhoc-reboot-required.png" /></p>
+<p>All modules used in the previous exercises are described in detail in the <a href="https://docs.ansible.com/ansible/latest/index.html" target="_blank">Ansible documentation</a>.</p>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_ping_module.html" target="_blank">win_ping</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/ansible/windows/setup_module.html" target="_blank">setup</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_shell_module.html" target="_blank">win_shell</a></li>
+</ul>
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Zurück zum Seitenanfang
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
+        
+          
+          <a href="../../preparation/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Preparation" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Zurück
+              </span>
+              <div class="md-ellipsis">
+                Preparation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../windows-playbook/" class="md-footer__link md-footer__link--next" aria-label="Weiter: 2 - Writing playbooks" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Weiter
+              </span>
+              <div class="md-ellipsis">
+                2 - Writing playbooks
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Computacenter 2023
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/TimGrt/ansible-windows-workshop/blob/main/Dockerfile" target="_blank" rel="noopener" title="Container Definition" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../assets/extra/refresh-on-toggle-dark-light.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../assets/extra/tablesort.js"></script>
+      
+    
+  </body>
+</html>

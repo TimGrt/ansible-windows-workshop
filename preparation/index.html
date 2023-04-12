@@ -1,0 +1,1036 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../windows-automation/windows-adhoc/">
+      
+      <link rel="icon" href="../assets/images/ansible-logo-black.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>Preparation - Ansible Workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings1.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings2.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings3.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings4.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings5.css">
+    
+      <link rel="stylesheet" href="../css/print-site-enum-headings6.css">
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/tables.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="computacenter" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#preparation" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <!-- Add announcement here, including arbitrary HTML -->
+  <!-- <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 14.25 14H8.061l-2.574 2.573A1.458 1.458 0 0 1 3 15.543V14H1.75A1.75 1.75 0 0 1 0 12.25v-9.5C0 1.784.784 1 1.75 1ZM1.5 2.75v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Z"/><path d="M22.5 8.75a.25.25 0 0 0-.25-.25h-3.5a.75.75 0 0 1 0-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0 1 22.25 20H21v1.543a1.457 1.457 0 0 1-2.487 1.03L15.939 20H10.75A1.75 1.75 0 0 1 9 18.25v-1.465a.75.75 0 0 1 1.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 0 1 .53.22l2.72 2.72v-2.19a.75.75 0 0 1 .75-.75h2a.25.25 0 0 0 .25-.25v-9.5Z"/></svg></span> &nbsp;Die aktuelle URL zur Demo-Umgebung: http://9883.example.com -->
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href=".." title="Ansible Workshop" class="md-header__button md-logo" aria-label="Ansible Workshop" data-md-component="logo">
+      
+  <img src="../assets/images/ansible-logo-black.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ansible Workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Preparation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="computacenter" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="grey" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TimGrt/ansible-windows-workshop" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    timgrt/ansible-windows-workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Ansible Workshop" class="md-nav__button md-logo" aria-label="Ansible Workshop" data-md-component="logo">
+      
+  <img src="../assets/images/ansible-logo-black.png" alt="logo">
+
+    </a>
+    Ansible Workshop
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TimGrt/ansible-windows-workshop" title="Zum Repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    timgrt/ansible-windows-workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="..">Workshop Overview</a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Workshop Overview
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Preparation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Preparation
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configure-dev-environment" class="md-nav__link">
+    Configure Dev Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Dev Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-ansible-dependencies" class="md-nav__link">
+    Install Ansible &amp; dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useful-vscode-extension" class="md-nav__link">
+    Useful VScode Extension
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-azure-devops-and-git" class="md-nav__link">
+    Configure Azure DevOps and Git
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-to-aap" class="md-nav__link">
+    Login to AAP
+  </a>
+  
+    <nav class="md-nav" aria-label="Login to AAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-scm-credential" class="md-nav__link">
+    Create SCM Credential
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-machine-credential" class="md-nav__link">
+    Create Machine Credential
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Exercises
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Exercises
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-automation/windows-adhoc/" class="md-nav__link">
+        1 - Ad-hoc commands
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-automation/windows-playbook/" class="md-nav__link">
+        2 - Writing playbooks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-automation/windows-project/" class="md-nav__link">
+        3 - Sync Project to AAP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-automation/windows-advanced-playbooks/" class="md-nav__link">
+        4 - Advanced playbook concepts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows-automation/windows-patch/" class="md-nav__link">
+        5 - Optional: Automated Patching
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configure-dev-environment" class="md-nav__link">
+    Configure Dev Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Dev Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-ansible-dependencies" class="md-nav__link">
+    Install Ansible &amp; dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useful-vscode-extension" class="md-nav__link">
+    Useful VScode Extension
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-azure-devops-and-git" class="md-nav__link">
+    Configure Azure DevOps and Git
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-to-aap" class="md-nav__link">
+    Login to AAP
+  </a>
+  
+    <nav class="md-nav" aria-label="Login to AAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-scm-credential" class="md-nav__link">
+    Create SCM Credential
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-machine-credential" class="md-nav__link">
+    Create Machine Credential
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+    <a href="../print_page/" title="Print Site" class="md-content__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5v1m5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5v3m4-3H17v1h1.5V13H17v2h-1.5V9h3v1.5m-6.5 0h1v3h-1v-3m-5 0h1v1H7v-1Z"/></svg>
+    </a>
+
+
+
+                  
+
+
+<h1 id="preparation">Preparation</h1>
+<h2 id="configure-dev-environment">Configure Dev Environment</h2>
+<p>We will be using <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code (VScode)</a> as our IDE for Ansible development, we will connect VScode to a (Linux) development host.</p>
+<details class="warning">
+<summary><strong>I never worked with VSCode</strong> ! What do I need to know?</summary>
+<p>VSCode ist a really powerfull and customizable IDE. Nearly everything you need to work with Textfiles is there or can be added as a Plugin.</p>
+<p>These Plugins are the main point for many people to choose VSCode.
+(wait a moment, isn't that extendability also a reason people use Ansible?)</p>
+<p>The unchanged look and feel of VSCode after the first start</p>
+<p><img alt="Visual Studio Code unchanged look" src="../windows-automation/images/vscode-first-look.png" /></p>
+<p>In the <code>Editor</code> Area there is a <code>Walktroughs</code> Section. It is highly advised to take a look at the Guides there even as a long time User you may be surprised by some features or shortcuts.</p>
+<p>In the <code>Activity Bar</code> there are alot of important things present that you will need on a regular basis. From top to bottom:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>  + File Explorer
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>Expands to a file explorer where you can see the folder structure. 
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>      Maybe you need to select a folder first
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  + Search/Replace
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>Search and replace in your working directory accross all files
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  + Git / Source Control
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>Use versioncontrol to commit your change, switch branches 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      and push/pull to a remote destination
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  + Run / Debug
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>not really needed for ansible
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  + Extensions
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>All the Extension in a single place ready to search/download/install/uninstall 
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  + User Account
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>Your User Account 
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  + VSCode Settings
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="k">*</span><span class="w"> </span>All Settings, preferences, themes, commands and a lot more to explore
+</code></pre></div></p>
+<p>This is small overview for the vanilla VSCode experience. We will add more functionality in the preparation phase.</p>
+</details>
+<p>Add the <em>Remote Explorer</em> extension as your first Plugin.</p>
+<figure>
+<p><img alt="Install VScode Remote SSH Extension" src="../windows-automation/images/vscode-install-remote-ssh.png" />
+  </p>
+<figcaption>Install VScode Remote SSH Extension</figcaption>
+</figure>
+<details class="info">
+<summary><strong>I never worked with VSCode</strong> ! What changed?</summary>
+<p>Please wait a moment for it to finish. Afterwards there will be a new Icon in your <code>Activity Bar</code> it appears right under the <code>Extensions</code> Icon. The Status Bar also changed a bit in the left corner. There is a file opening in the Editor Pane with detailed Informations and Settings for the plugin you just installed. Sometimes it even shows a small demo.</p>
+</details>
+<p>VScode has now a <em>Remote Explorer</em> icon in the <code>Activity Bar</code>, click on it, we will add a new <em>SSH</em> connection. Click on <em>Open SSH config file</em>, the <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0a8.2 8.2 0 0 1 .701.031C9.444.095 9.99.645 10.16 1.29l.288 1.107c.018.066.079.158.212.224.231.114.454.243.668.386.123.082.233.09.299.071l1.103-.303c.644-.176 1.392.021 1.82.63.27.385.506.792.704 1.218.315.675.111 1.422-.364 1.891l-.814.806c-.049.048-.098.147-.088.294.016.257.016.515 0 .772-.01.147.038.246.088.294l.814.806c.475.469.679 1.216.364 1.891a7.977 7.977 0 0 1-.704 1.217c-.428.61-1.176.807-1.82.63l-1.102-.302c-.067-.019-.177-.011-.3.071a5.909 5.909 0 0 1-.668.386c-.133.066-.194.158-.211.224l-.29 1.106c-.168.646-.715 1.196-1.458 1.26a8.006 8.006 0 0 1-1.402 0c-.743-.064-1.289-.614-1.458-1.26l-.289-1.106c-.018-.066-.079-.158-.212-.224a5.738 5.738 0 0 1-.668-.386c-.123-.082-.233-.09-.299-.071l-1.103.303c-.644.176-1.392-.021-1.82-.63a8.12 8.12 0 0 1-.704-1.218c-.315-.675-.111-1.422.363-1.891l.815-.806c.05-.048.098-.147.088-.294a6.214 6.214 0 0 1 0-.772c.01-.147-.038-.246-.088-.294l-.815-.806C.635 6.045.431 5.298.746 4.623a7.92 7.92 0 0 1 .704-1.217c.428-.61 1.176-.807 1.82-.63l1.102.302c.067.019.177.011.3-.071.214-.143.437-.272.668-.386.133-.066.194-.158.211-.224l.29-1.106C6.009.645 6.556.095 7.299.03 7.53.01 7.764 0 8 0Zm-.571 1.525c-.036.003-.108.036-.137.146l-.289 1.105c-.147.561-.549.967-.998 1.189-.173.086-.34.183-.5.29-.417.278-.97.423-1.529.27l-1.103-.303c-.109-.03-.175.016-.195.045-.22.312-.412.644-.573.99-.014.031-.021.11.059.19l.815.806c.411.406.562.957.53 1.456a4.709 4.709 0 0 0 0 .582c.032.499-.119 1.05-.53 1.456l-.815.806c-.081.08-.073.159-.059.19.162.346.353.677.573.989.02.03.085.076.195.046l1.102-.303c.56-.153 1.113-.008 1.53.27.161.107.328.204.501.29.447.222.85.629.997 1.189l.289 1.105c.029.109.101.143.137.146a6.6 6.6 0 0 0 1.142 0c.036-.003.108-.036.137-.146l.289-1.105c.147-.561.549-.967.998-1.189.173-.086.34-.183.5-.29.417-.278.97-.423 1.529-.27l1.103.303c.109.029.175-.016.195-.045.22-.313.411-.644.573-.99.014-.031.021-.11-.059-.19l-.815-.806c-.411-.406-.562-.957-.53-1.456a4.709 4.709 0 0 0 0-.582c-.032-.499.119-1.05.53-1.456l.815-.806c.081-.08.073-.159.059-.19a6.464 6.464 0 0 0-.573-.989c-.02-.03-.085-.076-.195-.046l-1.102.303c-.56.153-1.113.008-1.53-.27a4.44 4.44 0 0 0-.501-.29c-.447-.222-.85-.629-.997-1.189l-.289-1.105c-.029-.11-.101-.143-.137-.146a6.6 6.6 0 0 0-1.142 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM9.5 8a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 9.5 8Z"/></svg></span> icon. Use the personal <code>.ssh\config</code> file, the first entry in the list.</p>
+<figure>
+<p><img alt="VScode Remote SSH configuration" src="../windows-automation/images/VScodeRemoteSSHconfig.png" />
+  </p>
+<figcaption>VScode Remote SSH configuration</figcaption>
+</figure>
+<p>Input the following configuration and save the file (use <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-s">S</kbd></span> or <code>File</code> and <code>Save</code>) afterwards.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">Host Ansible-Dev-Node</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="na">HostName hostname</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="na">User username</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You trainer will provide you with the exact values for <code>HostName</code> and <code>User</code>!</p>
+</div>
+<p>After saving, if the new SSH target does not show up, click the <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M386.3 160H336c-17.7 0-32 14.3-32 32s14.3 32 32 32h128c17.7 0 32-14.3 32-32V64c0-17.7-14.3-32-32-32s-32 14.3-32 32v51.2l-17.6-17.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8 229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3 163.8-62.5 226.3 0l17.2 17.2z"/></svg></span> <em>Refresh</em> button when hovering above the <em>Remote</em> tab.</p>
+<p>Do a <em>right-click</em> on the SSH target <em>Ansible-Dev-Node</em> and choose <em>Connect in current window...</em>. You will be asked two questions, what kind of platform the target node is (choose <code>Linux</code>), afterwards input your password. On the first connection you need to enter your password multiple times.</p>
+<figure>
+<p><img alt="VScode Remote SSH connection" src="../windows-automation/images/VScodeRemoteSSHconnection.png" />
+  </p>
+<figcaption>VScode Remote SSH connection 1</figcaption>
+</figure>
+<figure>
+<p><img alt="VScode Remote SSH connection" src="../windows-automation/images/vscode-connect-remote-ssh.png" />
+  </p>
+<figcaption>VScode Remote SSH connection 2</figcaption>
+</figure>
+<p>Give it some time for installing the VScode plugin (in <code>~/.vscode-server</code>), a successful connection is established once a green <em>SSH: Ansible-Dev-Node</em> box is shown in the VScode footer. If you open a Terminal now, you will be on the remote host and have a remote shell and linux functionality.</p>
+<figure>
+<p><img alt="VScode Remote SSH connection" src="../windows-automation/images/vscode-connected-remote-ssh.png" />
+  </p>
+<figcaption>VScode Remote SSH connected</figcaption>
+</figure>
+<h3 id="install-ansible-dependencies">Install Ansible &amp; dependencies</h3>
+<p>You need to install Ansible (and a couple of Python dependencies) yourself. Copy (the <em>code block</em> has a copy button on the right) and paste (<em>right-click</em> in the terminal window) the command  in your terminal and hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>ansible-core<span class="w"> </span>ansible-lint<span class="w"> </span>pywinrm<span class="w"> </span>pywinrm<span class="o">[</span>kerberos<span class="o">]</span>
+</code></pre></div>
+<p>What is installed here?</p>
+<ul>
+<li><code>ansible-core</code> - the Ansible binaries and a subset of available modules</li>
+<li><code>ansible-lint</code> - a Best-Practice checker for Ansible (not used or discussed in detail today, is a dependency for the Ansible VScode extension)</li>
+<li><code>pywinrm</code> and <code>pywinrm[kerberos]</code> - Python libraries for Windows Remote Management</li>
+</ul>
+<p>The Ansible binary (and other dependencies) were installed in your home directory and is (not yet) usable. We need to adjust the <em>PATH</em>. The following command adds a line to the end of your (personal) <code>.bashrc</code> file. Copy and paste the command  in your terminal and hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\nexport PATH=~/.local/bin:\$PATH&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</code></pre></div>
+<p>Afterwards, <em>source</em> the file for the changes to take effect:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</code></pre></div>
+<h3 id="useful-vscode-extension">Useful VScode Extension</h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is an optional step, it may help with the first steps and is useful for further development with Ansible.</p>
+</div>
+<p>Visual Studio Code has a huge <em>Marketplace</em> with loads of useful Plugins or feature extension, one of which is especially useful for Ansible Development and is directly from RedHat and itself is developed with all code open source.</p>
+<figure>
+<p><img alt="VScode Marketplace Ansible Extension" src="../windows-automation/images/VScodeMarketPlaceAnsibleExtension.png" />
+  </p>
+<figcaption>VScode Marketplace Ansible Extension</figcaption>
+</figure>
+<p>Go to <em>Extensions</em> and search for <em>redhat.ansible</em>. Use the extension from <em>Red Hat</em>, this one is activly maintained. In the extension description, click the <em>Install</em> button.</p>
+<details class="info">
+<summary>What do I need this extension for and what changed?</summary>
+<p>This extension adds some cool features to VSCode that are purely ansible specific and need <code>ansible</code> and <code>ansible-lint</code> on your remote host to work.</p>
+<p>If VSCode identifies your file as an "Ansible" file it will change its behaviour. You can check this on the right side of your <code>Status Bar</code> at the bottom. <code>.yml</code> and <code>.yaml</code> files should be identified as YAML Language. Which is correct but we want to change that behaviour to be even "more" correct.</p>
+<p><img alt="Language Settings on Default" src="../windows-automation/images/vscode-status-bar-language-settings.png" /></p>
+<p>Click on <code>YAML</code> in the <code>Status Bar</code>. VSCode opens a dialog at the top. Select <code>Configure File Association for '.yml'</code>. Then select Ansible.</p>
+<p><img alt="Language Settings on Default" src="../windows-automation/images/vscode-language-settings-change.png" />
+<img alt="Language Settings on Default" src="../windows-automation/images/vscode-language-settings-change-2.png" /></p>
+<p>The language in the <code>Status Bar</code> should now look like this:</p>
+<p><img alt="Language Settings on Default" src="../windows-automation/images/vscode-language-settings-ansible.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">For more information read the official instructions, please</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=redhat.ansible" target="_blank">Ansible Extension Information</a> </p>
+</div>
+</details>
+<h2 id="configure-azure-devops-and-git">Configure Azure DevOps and Git</h2>
+<p>In Azure DevOps code is stored in <em>repositories</em>. These repositories on the other hand are kept in a <em>project</em>. Every project can have multiple repositories.</p>
+<p>Login to Azure DevOps and choose the <em>Project</em> in which you want to create your <em>Repository</em>. Every project, by default, already has one repository, we will create an additional one for our personal workshop content.</p>
+<p>In the top, open the drop-down menu and choose <em>New repository</em>.</p>
+<figure>
+<p><img alt="Azure DevOps - Create new repository" loading="lazy" src="../windows-automation/images/AzureDevOpsNewRepo.png" />
+  </p>
+<figcaption>Azure DevOps - Create new repository</figcaption>
+</figure>
+<p>On the right of your browser window, enter a name <code>Ansible-Workshop-username</code>for your repository, replace <em>username</em> with your username abbreviation. Leave all other configuration as-is.</p>
+<figure>
+<p><img alt="Azure DevOps - Create new repository" loading="lazy" src="../windows-automation/images/AzureDevOpsNewRepo2.png" width="500" />
+  </p>
+<figcaption>Azure DevOps - New repository configuration</figcaption>
+</figure>
+<p>Once your repository (the place where your <em>code</em> (read: Ansible content) will be stored) is created, click the <code>Clone</code> button on the right.<br />
+Now, click the button <code>Generate Git credentials</code>:</p>
+<figure>
+<p><img alt="Azure DevOps - Generate Git credentials" loading="lazy" src="../windows-automation/images/AzureDevOpsGitCredentials.png" width="500" />
+  </p>
+<figcaption>Azure DevOps - Generate Git credentials</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Store the password (access token) now, you won't be able to retrieve it again!
+Also, make note of your username, we need it a bit later on.</p>
+</div>
+<p>All right, almost done!<br />
+Now, let's clone the repository in your home directory on the Ansible Development node.</p>
+<p>Click on the <code>Clone</code> button again and copy (by clicking <em>Copy clone URL to clipboard</em>) the <em>HTTPS</em> URL.<br />
+In the terminal of the dev node, paste the content with a right-click after typing <code>git clone</code>:</p>
+<div class="no-copy highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://******@dev.azure.com/******/******/_git/Ansible-Workshop-******
+</code></pre></div>
+<p>Change into the directory (with <code>cd</code>).</p>
+<p>To work and interact with Git, we will need to configure it slightly. Run the following commands:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;FirstName LastName&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span>firstNameLastName@beiersdorf.com
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These are only examples, use your real Name and E-Mail address!<br />
+This is used to identify, who made the code changes, which is fundamental for collaborative work on your Ansible playbooks.</p>
+</div>
+<h2 id="login-to-aap">Login to AAP</h2>
+<p>There are a number of constructs in the Automation Controller UI that enable multi-tenancy, notifications, scheduling, etc. However, we are only going to focus on a few of the key constructs that are required for this workshop today.</p>
+<ul>
+<li>Credentials</li>
+<li>Projects</li>
+<li>Inventory</li>
+<li>Job Template</li>
+</ul>
+<p>Your Automation Controller instance url and credentials were supplied to you by the trainer.</p>
+<p>Use the SAML login option, you may need to open the <em>icognito</em> browser, if you need to access with a different user for single-sign on.</p>
+<h3 id="create-scm-credential">Create SCM Credential</h3>
+<p>Credentials are utilized by Controller for authentication when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.</p>
+<p>There are many <a href="https://docs.ansible.com/automation-controller/latest/html/userguide/credentials.html#credential-types" target="_blank">types of credentials</a> including machine, network, and various cloud providers. For this workshop, we are using <strong>machine</strong> and <strong>source control</strong> credentials.</p>
+<p>Select CREDENTIALS from the left hand panel under resources.</p>
+<figure>
+<p><img alt="AAP Credentials" loading="lazy" src="../windows-automation/images/1-controller-credentials.png" />
+  </p>
+<figcaption>AAP - Add credentials</figcaption>
+</figure>
+<p>We need to access our source code repository, where our automation projects will live.<br />
+Click the <img alt="Add" src="../windows-automation/images/add.png" /> icon and add a new credential.</p>
+<p>Complete the form using the following entries, replace <em>username</em> with your username abbreviation:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Azure DevOps <em>username</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Description</td>
+<td>SCM credential for <em>username</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Organization</td>
+<td><em>Choose your organization</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Credential Type</td>
+<td>Source Control</td>
+<td></td>
+</tr>
+<tr>
+<td>Username</td>
+<td><em>Your name from Azure DevOps</em></td>
+<td>Username as shown in the <em>Clone</em> button in Azure DevOps</td>
+</tr>
+<tr>
+<td>Password</td>
+<td><em>Your password</em></td>
+<td>The password you retrieved when creating the Git credentials</td>
+</tr>
+</tbody>
+</table>
+<p>Select SAVE <img alt="Save" src="../windows-automation/images/at_save.png" /></p>
+<p><img alt="Add SCM Credential" src="../windows-automation/images/1-controller-add-scm-credential.png" /></p>
+<h3 id="create-machine-credential">Create Machine Credential</h3>
+<p>We need to access our Windows <strong>Test</strong> machines over WinRM, let's create a <em>machine</em> credential for that.</p>
+<p>Click the <img alt="Add" src="../windows-automation/images/add.png" /> icon and add another new credential.</p>
+<p>Complete the form using the following entries, again, replace <em>username</em> with your username abbreviation:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Windows Test Host <em>username</em></td>
+<td></td>
+</tr>
+<tr>
+<td>Organization</td>
+<td>Default</td>
+<td></td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Machine</td>
+<td></td>
+</tr>
+<tr>
+<td>Username</td>
+<td><em>Login name</em></td>
+<td><em>Ask your trainer for assistance!</em></td>
+</tr>
+<tr>
+<td>Password</td>
+<td><em>password</em></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Add Machine Credential" src="../windows-automation/images/1-controller-add-machine-credential.png" /></p>
+<p>Select SAVE <img alt="Save" src="../windows-automation/images/at_save.png" /></p>
+<p>Perfect, all done for now, you are prepared for all further exercises!</p>
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Zurück zum Seitenanfang
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Zurück: Ansible Windows Enablement Workshop" rel="prev">
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Zurück
+              </span>
+              <div class="md-ellipsis">
+                Ansible Windows Enablement Workshop
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../windows-automation/windows-adhoc/" class="md-footer__link md-footer__link--next" aria-label="Weiter: 1 - Ad-hoc commands" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Weiter
+              </span>
+              <div class="md-ellipsis">
+                1 - Ad-hoc commands
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Computacenter 2023
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/TimGrt/ansible-windows-workshop/blob/main/Dockerfile" target="_blank" rel="noopener" title="Container Definition" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+        <script src="../assets/extra/refresh-on-toggle-dark-light.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../assets/extra/tablesort.js"></script>
+      
+    
+  </body>
+</html>
