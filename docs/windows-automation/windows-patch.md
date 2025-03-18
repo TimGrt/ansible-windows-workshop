@@ -25,14 +25,7 @@ You should now have an editor open in the right pane that can be used for creati
 Edit your site.yml and add a play definition and some tasks to your playbook. This will cover a very basic playbook for installing Windows Updates. Typically you would have even more tasks to accomplish the entire update process. This might entail creating service tickets, creating snapshots, or disabling monitoring.
 
 ```yaml
----
-- hosts: windows
-  name: This is my Windows patching playbook
-  tasks:
-    - name: Install Windows Updates
-      ansible.windows.win_updates:
-        category_names: "{{ categories | default(omit) }}"
-        reboot: '{{ reboot_server | default(true) }}'
+--8<-- "windows-patch-playbook.yml"
 ```
 
 !!! info "What are we doing?"

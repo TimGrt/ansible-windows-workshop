@@ -1,0 +1,19 @@
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Create site directory structure
+      ansible.windows.win_file:
+        path: "{{ item.path }}"
+        state: directory
+      loop: "{{ iis_sites }}"
+
+    - name: Create IIS site
+      community.windows.win_iis_website:
+        name: "{{ item.name }}"
+        state: started
+        port: "{{ item.port }}"
+        physical_path: "{{ item.path }}"
+      loop: "{{ iis_sites }}"
+      notify: restart iis service

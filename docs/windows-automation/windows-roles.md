@@ -55,11 +55,7 @@ Create a blank new file called `site.yml` in the same folder
 Update `site.yml` to look like to only call your role. It should look like below:
 
 ```yaml
-    ---
-    - name: This is my role-based playbook
-      hosts: windows
-      roles:
-        - iis_simple
+--8<-- "iis-role-playbook.yml"
 ```
 
 ![New site.yml](images/6-new-site.png)
@@ -69,26 +65,16 @@ Update `site.yml` to look like to only call your role. It should look like below
 Add a default variable to your role. Edit the `roles\iis_simple\defaults\main.yml` as follows:
 
 ```yaml
----
-# defaults file for iis_simple
-iis_sites:
-  - name: 'Ansible Playbook Test'
-    port: '8080'
-    path: 'C:\sites\playbooktest'
-  - name: 'Ansible Playbook Test 2'
-    port: '8081'
-    path: 'C:\sites\playbooktest2'
+--8<-- "iis-role-defaults-variables.yml"
 ```
 
 Add some role-specific variables to your role in `roles\iis_simple\vars\main.yml`.
 
 ```yaml
----
-# vars file for iis_simple
-iis_test_message: "Hello World!  My test IIS Server"
+--8<-- "iis-role-vars-variables.yml"
 ```
 
-!!! info "Hey, wait… did we just put variables in two seperate places?"
+!!! info "Hey, wait… did we just put variables in two separate places?"
 
     Yes… yes we did. Variables can live in quite a few places. Just to name a few:
 
@@ -107,13 +93,7 @@ iis_test_message: "Hello World!  My test IIS Server"
 Create your role handler in `roles\iis_simple\handlers\main.yml`.
 
 ```yaml
----
-# handlers file for iis_simple
-- name: restart iis service
-  ansible.windows.win_service:
-    name: W3Svc
-    state: restarted
-    start_mode: auto
+--8<-- "iis-role-handlers-tasks.yml"
 ```
 
 ## Step 5 - Add tasks
@@ -121,52 +101,7 @@ Create your role handler in `roles\iis_simple\handlers\main.yml`.
 Add tasks to your role in `roles\iis_simple\tasks\main.yml`.
 
 ```yaml
----
-# tasks file for iis_simple
-
-- name: Install IIS
-  ansible.windows.win_feature:
-    name: Web-Server
-    state: present
-
-- name: Create site directory structure
-  ansible.windows.win_file:
-    path: "{{ item.path }}"
-    state: directory
-  loop: "{{ iis_sites }}"
-
-- name: Create IIS site
-  ansible.windows.win_iis_website:
-    name: "{{ item.name }}"
-    state: started
-    port: "{{ item.port }}"
-    physical_path: "{{ item.path }}"
-  loop: "{{ iis_sites }}"
-  notify: restart iis service
-
-- name: Open port for site on the firewall
-  ansible.windows.win_firewall_rule:
-    name: "iisport{{ item.port }}"
-    enable: yes
-    state: present
-    localport: "{{ item.port }}"
-    action: Allow
-    direction: In
-    protocol: Tcp
-  loop: "{{ iis_sites }}"
-
-- name: Template simple web site to iis_site_path as index.html
-  ansible.windows.win_template:
-    src: 'index.html.j2'
-    dest: '{{ item.path }}\index.html'
-  loop: "{{ iis_sites }}"
-
-- name: Show website addresses
-  ansible.builtin.debug:
-    msg: "{{ item }}"
-  loop:
-    - http://{{ ansible_host }}:8080
-    - http://{{ ansible_host }}:8081
+--8<-- "iis-role-tasks.yml"
 ```
 
 ??? example "More separation is also possible"
@@ -225,8 +160,8 @@ Add tasks to your role in `roles\iis_simple\tasks\main.yml`.
         port: "{{ item.port }}"
         physical_path: "{{ item.path }}"
       loop: "{{ iis_sites }}"
-      notify: restart iis service
-    
+      notify: restart_iis_service_handler
+
     - name: Template simple web site to iis_site_path as index.html
       ansible.windows.win_template:
         src: 'index.html.j2'
@@ -275,7 +210,7 @@ Click the `synchronize changes` button on the blue bar at the bottom left. This 
 
 ## Step 8 - Run new playbook
 
-Now that you’ve successfully separated your original playbook into a role, let’s run it and see how it works. We don’t need to create a new template, as we are re-using the one from Exercise 5. When we run the template again, it will automatically refresh from git and launch our new role.
+Now that you’ve successfully separated your original playbook into a role, let’s run it and see how it works. We don’t need to create a new template, as we are reusing the one from Exercise 5. When we run the template again, it will automatically refresh from git and launch our new role.
 
 Before we can modify our Job Template, you must first go resync your Project again. So do that now.
 

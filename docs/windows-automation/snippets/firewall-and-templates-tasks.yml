@@ -1,0 +1,23 @@
+    - name: Open port for site on the firewall
+      community.windows.win_firewall_rule:
+        name: "iisport{{ item.port }}"
+        enable: true
+        state: present
+        localport: "{{ item.port }}"
+        action: Allow
+        direction: In
+        protocol: Tcp
+      loop: "{{ iis_sites }}"
+
+    - name: Template simple web site to iis_site_path as index.html
+      ansible.windows.win_template:
+        src: 'index.html.j2'
+        dest: '{{ item.path }}\index.html'
+      loop: "{{ iis_sites }}"
+
+    - name: Show website addresses
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop:
+        - http://{{ ansible_host }}:8080
+        - http://{{ ansible_host }}:8081

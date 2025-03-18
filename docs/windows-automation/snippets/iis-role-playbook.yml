@@ -1,0 +1,5 @@
+---
+- name: This is my role-based playbook
+  hosts: windows
+  roles:
+    - iis_simple

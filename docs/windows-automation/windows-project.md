@@ -122,7 +122,7 @@ If all went well, you should see something like this, but with your own custom m
 ![New Website with Personalized Test Message](images/4-website-output.png)
 
 !!! note
-    As these are test hosts only, the firewall does not allow external access to the webserver, therefor we need to check this locally.
+    As these are test hosts only, the firewall does not allow external access to the webserver, therefore we need to check this locally.
 
 ## Optional
 
@@ -137,24 +137,7 @@ Now that you have IIS Installed, create a new playbook called *remove\_iis.yml* 
     This playbook stops and removes the IIS service.
 
     ```yaml
-    ---
-    - name: Remove the IIS web service
-      hosts: windows
-      tasks:
-        - name: Stop IIS service
-          ansible.windows.win_service:
-            name: W3Svc
-            state: stopped
-
-        - name: Uninstall IIS
-          ansible.windows.win_feature:
-            name: Web-Server
-            state: absent
-
-        - name: Remove website index.html
-          ansible.windows.win_file:
-            path: C:\Inetpub\wwwroot\index.html
-            state: absent
+    --8<-- "remove-iis-playbook.yml"
     ```
 
 ## End Result
