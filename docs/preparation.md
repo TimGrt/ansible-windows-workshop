@@ -6,7 +6,7 @@ We will be using [Visual Studio Code (VScode)](https://code.visualstudio.com/){:
 
 ??? warning "**I never worked with VSCode** ! What do I need to know?"
 
-    VSCode ist a really powerfull and customizable IDE. Nearly everything you need to work with Textfiles is there or can be added as a Plugin.
+    VSCode is a really powerful and customizable IDE. Nearly everything you need to work with Textfiles is there or can be added as a Plugin.
 
     These Plugins are the main point for many people to choose VSCode.
     (wait a moment, isn't that extendability also a reason people use Ansible?)
@@ -17,22 +17,23 @@ We will be using [Visual Studio Code (VScode)](https://code.visualstudio.com/){:
 
     In the `Editor` Area there is a `Walktroughs` Section. It is highly advised to take a look at the Guides there even as a long time User you may be surprised by some features or shortcuts.
 
-    In the `Activity Bar` there are alot of important things present that you will need on a regular basis. From top to bottom:
+    In the `Activity Bar` there are a lot of important things present that you will need on a regular basis. From top to bottom:
+
     ```markdown
       + File Explorer
-        * Expands to a file explorer where you can see the folder structure. 
+        * Expands to a file explorer where you can see the folder structure.
           Maybe you need to select a folder first
       + Search/Replace
-        * Search and replace in your working directory accross all files
+        * Search and replace in your working directory across all files
       + Git / Source Control
-        * Use versioncontrol to commit your change, switch branches 
+        * Use versioncontrol to commit your change, switch branches
           and push/pull to a remote destination
       + Run / Debug
         * not really needed for ansible
       + Extensions
-        * All the Extension in a single place ready to search/download/install/uninstall 
+        * All the Extension in a single place ready to search/download/install/uninstall
       + User Account
-        * Your User Account 
+        * Your User Account
       + VSCode Settings
         * All Settings, preferences, themes, commands and a lot more to explore
     ```
@@ -46,7 +47,7 @@ Add the *Remote Explorer* extension as your first Plugin.
 </figure>
 
 ??? info "**I never worked with VSCode** ! What changed?"
-    Please wait a moment for it to finish. Afterwards there will be a new Icon in your `Activity Bar` it appears right under the `Extensions` Icon. The Status Bar also changed a bit in the left corner. There is a file opening in the Editor Pane with detailed Informations and Settings for the plugin you just installed. Sometimes it even shows a small demo.
+    Please wait a moment for it to finish. Afterwards there will be a new Icon in your `Activity Bar` it appears right under the `Extensions` Icon. The Status Bar also changed a bit in the left corner. There is a file opening in the Editor Pane with detailed Information and Settings for the plugin you just installed. Sometimes it even shows a small demo.
 
 VScode has now a *Remote Explorer* icon in the `Activity Bar`, click on it, we will add a new *SSH* connection. Click on *Open SSH config file*, the :octicons-gear-16: icon. Use the personal `.ssh\config` file, the first entry in the list.
 
@@ -125,13 +126,13 @@ Visual Studio Code has a huge *Marketplace* with loads of useful Plugins or feat
   <figcaption>VScode Marketplace Ansible Extension</figcaption>
 </figure>
 
-Go to *Extensions* and search for *redhat.ansible*. Use the extension from *Red Hat*, this one is activly maintained. In the extension description, click the *Install* button.
+Go to *Extensions* and search for *redhat.ansible*. Use the extension from *Red Hat*, this one is actively maintained. In the extension description, click the *Install* button.
 
 ??? info "What do I need this extension for and what changed?"
     This extension adds some cool features to VSCode that are purely ansible specific and need `ansible` and `ansible-lint` on your remote host to work.
 
     If VSCode identifies your file as an "Ansible" file it will change its behaviour. You can check this on the right side of your `Status Bar` at the bottom. `.yml` and `.yaml` files should be identified as YAML Language. Which is correct but we want to change that behaviour to be even "more" correct.
-    
+
     ![Language Settings on Default](vscode-status-bar-language-settings.png)
 
     Click on `YAML` in the `Status Bar`. VSCode opens a dialog at the top. Select `Configure File Association for '.yml'`. Then select Ansible.
@@ -144,10 +145,9 @@ Go to *Extensions* and search for *redhat.ansible*. Use the extension from *Red 
     ![Language Settings on Default](vscode-language-settings-ansible.png)
 
 
-    !!! info "For more information read the official instructions, please" 
-    
-        [Ansible Extension Information](https://marketplace.visualstudio.com/items?itemName=redhat.ansible){:target="_blank"} 
+    !!! info "For more information read the official instructions, please"
 
+        [Ansible Extension Information](https://marketplace.visualstudio.com/items?itemName=redhat.ansible){:target="_blank"}
 
 ## Configure Azure DevOps and Git
 
@@ -206,7 +206,6 @@ git config --global user.email firstNameLastName@beiersdorf.com
 !!! warning
     These are only examples, use your real Name and E-Mail address!  
     This is used to identify, who made the code changes, which is fundamental for collaborative work on your Ansible playbooks.
-
 
 ## Login to AAP
 

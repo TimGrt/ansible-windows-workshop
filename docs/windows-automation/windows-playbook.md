@@ -86,7 +86,7 @@ If you want to see the entire playbook for reference, skip to the bottom of this
 
 ??? info "Additional info regarding the `name` parameter"
     The `name` key is optional, still, it is highly advisable to use it, as this is the output you will be getting when executing the playbook.  
-    When ommiting the `name` parameter, your playbook only will output that it does something with the `ansible.windows.win_feature` module, but not what it does exactly.
+    When omitting the `name` parameter, your playbook only will output that it does something with the `ansible.windows.win_feature` module, but not what it does exactly.
 
 ```yaml
     ansible.windows.win_feature:
@@ -192,27 +192,5 @@ You are ready to automate!
     In the meantime, your completed playbook should look like this. Take note of the spacing and alignment.
 
 ```yaml
----
-- name: Install the iis web service
-  hosts: windows
-
-  tasks:
-    - name: Install iis
-      ansible.windows.win_feature:
-        name: Web-Server
-        state: present
-
-    - name: Start iis service
-      ansible.windows.win_service:
-        name: W3Svc
-        state: started
-
-    - name: Create website index.html
-      ansible.windows.win_copy:
-        content: "{{ iis_test_message }}"
-        dest: C:\Inetpub\wwwroot\index.html
-
-    - name: Show website address
-      ansible.builtin.debug:
-        msg: "Open an RDP session and open http://{{ ansible_host }} in a browser."
+--8<-- "iis-basic-playbook.yml"
 ```

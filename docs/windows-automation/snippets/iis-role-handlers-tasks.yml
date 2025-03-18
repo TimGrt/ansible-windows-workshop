@@ -1,0 +1,8 @@
+---
+# handlers file for iis_simple
+- name: Restart iis service
+  listen: restart_iis_service_handler
+  ansible.windows.win_service:
+    name: W3Svc
+    state: restarted
+    start_mode: auto

@@ -59,58 +59,26 @@ for creating your playbook.
 ## Step 2 - Play definition
 
 Add a play definition and some variables to your playbook. These include
-addtional packages your playbook will install on your web servers, plus
+additional packages your playbook will install on your web servers, plus
 some web server specific configurations.
 
 ```yaml
----
-- name: This is a play within a playbook
-  hosts: windows
-  vars:
-    iis_sites:
-      - name: 'Ansible Playbook Test'
-        port: '8080'
-        path: 'C:\sites\playbooktest'
-      - name: 'Ansible Playbook Test 2'
-        port: '8081'
-        path: 'C:\sites\playbooktest2'
-    iis_test_message: "Hello World!  My test IIS Server"
+--8<-- "iis-playbook-play.yml"
 ```
 
 ## Step 3 - Add tasks
 
-Add a new task called **install IIS**. After writing the playbook, click `File` :material-arrow-right: `Save` to save your changes.
+Add a couple of tasks to your *play*, ensure the correct indentation of the *tasks* (as list items) under the `tasks` key. After writing the playbook, click `File` :material-arrow-right: `Save` to save your changes.
 
 ```yaml
-  tasks:
-    - name: Install IIS
-      ansible.windows.win_feature:
-        name: Web-Server
-        state: present
-
-    - name: Create site directory structure
-      ansible.windows.win_file:
-        path: "{{ item.path }}"
-        state: directory
-      loop: "{{ iis_sites }}"
-
-    - name: Create IIS site
-      community.windows.win_iis_website:
-        name: "{{ item.name }}"
-        state: started
-        port: "{{ item.port }}"
-        physical_path: "{{ item.path }}"
-      loop: "{{ iis_sites }}"
-      notify: restart iis service
+--8<-- "install-iis-tasks.yml"
 ```
 
 ??? question "Did you spot that we used two different Ansible collections?"
     This is not an error, the Windows modules are stored in two collections, `ansible.windows` and `community.windows`.  
     Which may seem odd, but this makes sense (if know about the background).  
     The modules in the `ansible.windows` collection are *certified* by Red Hat, if any bugs happen in those modules, Red Hat will fix them as part of the AAP subscription.  
-    The modules in the `community.windows` collection are *community-maintained*, bug fixes must come from Open Source contributors (which are as fast or even faster than Red Hat itself). As development is much fast in the Open Source community, this collections has even more modules than the other Windows collection!
-
-![site.yml part 1](images/5-vscode-iis-yaml.png)
+    The modules in the `community.windows` collection are *community-maintained*, bug fixes must come from Open Source contributors (which are as fast or even faster than Red Hat itself). As development is much faster in the Open Source community, this collection has even more modules than the other Windows collection!
 
 !!! info "What is happening here!?"
 
@@ -152,39 +120,17 @@ for creating your template. Enter the following details:
 
 ![index.html template](images/5-vscode-template.png)
 
-Edit back your playbook, `site.yml`, by opening your firewall ports and
+Edit back your playbook `site.yml` by opening your firewall ports and
 writing the template. Use single quotes for `win_template` in order to
 not escape the forward slash.
 
 ```yaml
-    - name: Open port for site on the firewall
-      community.windows.win_firewall_rule:
-        name: "iisport{{ item.port }}"
-        enable: yes
-        state: present
-        localport: "{{ item.port }}"
-        action: Allow
-        direction: In
-        protocol: Tcp
-      loop: "{{ iis_sites }}"
-
-    - name: Template simple web site to iis_site_path as index.html
-      ansible.windows.win_template:
-        src: 'index.html.j2'
-        dest: '{{ item.path }}\index.html'
-      loop: "{{ iis_sites }}"
-
-    - name: Show website addresses
-      ansible.builtin.debug:
-        msg: "{{ item }}"
-      loop:
-        - http://{{ ansible_host }}:8080
-        - http://{{ ansible_host }}:8081
+--8<-- "firewall-and-templates-tasks.yml"
 ```
 
 !!! info "So… what did I just write?"
 
-    * `win_firewall_rule:` This module is used to create, modify, and update firewall rules. 
+    * `win_firewall_rule:` This module is used to create, modify, and update firewall rules.
     * `win_template:` This module specifies that a jinja2 template is being used and deployed.
     * `loop:` used in Ansible to run a task multiple times. Expects a list, which can be provided directly (as in the last task) or in a variable.
     * `debug:` Again, like in the `iis_basic` playbook, this task displays the URLs to access the sites we are creating for this exercise.
@@ -200,12 +146,7 @@ The `handlers` block should start after a one-level indentation, that
 is, two spaces. It should align with the `tasks` block.
 
 ```yaml
-  handlers:
-    - name: restart iis service
-      ansible.windows.win_service:
-        name: W3Svc
-        state: restarted
-        start_mode: auto
+--8<-- "firewall-and-templates-tasks.yml"
 ```
 
 !!! info "You can’t have a former if you don’t mention the latter"
@@ -216,11 +157,11 @@ is, two spaces. It should align with the `tasks` block.
       module, and the options for that module. This is the definition of
       a handler.
     * `notify: restart iis service` …and here is your latter. Finally!
-      The `notify` statement is the invocation of a handler by name.
+      The `notify` statement is the invocation of a handler by *listener* name.
       Quite the reveal, we know. You already noticed that you’ve added a
       `notify` statement to the `win_iis_website` task, now you know
       why.
-    * the order of `tasks` and `handlers` is not important, you could define Handlers above the tasks. Ansible knows what to do with both of them.
+    * the order of `tasks` and `handlers` is not important, Ansible knows what to do with both of them.
 
 ## Step 5 - Commit and Review
 
@@ -248,70 +189,7 @@ Now let’s take a second look to make sure everything looks the way you
 intended. If not, now is the time for us to fix it up. The playbook below should execute successfully.
 
 ```yaml
----
-- name: This is a play within a playbook
-  hosts: windows
-  vars:
-    iis_sites:
-      - name: 'Ansible Playbook Test'
-        port: '8080'
-        path: 'C:\sites\playbooktest'
-      - name: 'Ansible Playbook Test 2'
-        port: '8081'
-        path: 'C:\sites\playbooktest2'
-    iis_test_message: "Hello World!  My test IIS Server"
 
-  tasks:
-    - name: Install IIS
-      ansible.windows.win_feature:
-        name: Web-Server
-        state: present
-
-    - name: Create site directory structure
-      ansible.windows.win_file:
-        path: "{{ item.path }}"
-        state: directory
-      loop: "{{ iis_sites }}"
-
-    - name: Create IIS site
-      community.windows.win_iis_website:
-        name: "{{ item.name }}"
-        state: started
-        port: "{{ item.port }}"
-        physical_path: "{{ item.path }}"
-      loop: "{{ iis_sites }}"
-      notify: restart iis service
-
-    - name: Open port for site on the firewall
-      community.windows.win_firewall_rule:
-        name: "iisport{{ item.port }}"
-        enable: yes
-        state: present
-        localport: "{{ item.port }}"
-        action: Allow
-        direction: In
-        protocol: Tcp
-      loop: "{{ iis_sites }}"
-
-    - name: Template simple web site to iis_site_path as index.html
-      ansible.windows.win_template:
-        src: 'index.html.j2'
-        dest: '{{ item.path }}\index.html'
-      loop: "{{ iis_sites }}"
-
-    - name: Show website addresses
-      ansible.builtin.debug:
-        msg: "{{ item }}"
-      loop:
-        - http://{{ ansible_host }}:8080
-        - http://{{ ansible_host }}:8081
-
-  handlers:
-    - name: restart iis service
-      ansible.windows.win_service:
-        name: W3Svc
-        state: restarted
-        start_mode: auto
 ```
 
 ## Step 6 - Create Job template

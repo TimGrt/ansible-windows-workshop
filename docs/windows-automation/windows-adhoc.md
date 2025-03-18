@@ -34,7 +34,7 @@ ansible [core 2.14.0]
   libyaml = True
 ```
 
-The output gives some useful informations, the most important one are these:
+The output gives some useful information, the most important one are these:
 
 * `config file = /etc/ansible/ansible.cfg` - The currently used configuration file for Ansible
 * `python version = 3.9.13` - The Python interpreter used on the Controller (there may be multiple Python version installed...)
@@ -46,7 +46,7 @@ Don't worry if your `ansible --version` command outputs `config file = None`, yo
     This is an example configuration from a different Ansible controller.
 
     ``` { .bash .no-copy }
-    [student@ansible-1 workshop_project]$ cat /etc/ansible/ansible.cfg 
+    [student@ansible-1 workshop_project]$ cat /etc/ansible/ansible.cfg
     [defaults]
     stdout_callback = yaml
     connection = smart
@@ -69,7 +69,7 @@ Don't worry if your `ansible --version` command outputs `config file = None`, yo
 
 ### Step 1.1 - On CLI
 
-Ansible needs to know which hosts are targeted for the automation, therefor all Ansible content development starts with defining a *inventory* and sorting your hosts into *groups* in it. For most use cases, a inventory in the `.ini` format is the easiest to work with. Let's create a simple inventory with a single group called `windows` and put your test host in it. Create a file `hosts.ini` (you could leave out the file extension, by default, Ansible asumes that the file is formated in the *ini* format).
+Ansible needs to know which hosts are targeted for the automation, therefore all Ansible content development starts with defining a *inventory* and sorting your hosts into *groups* in it. For most use cases, a inventory in the `.ini` format is the easiest to work with. Let's create a simple inventory with a single group called `windows` and put your test host in it. Create a file `hosts.ini` (you could leave out the file extension, by default, Ansible assumes that the file is formatted in the *ini* format).
 
 ```bash
 touch hosts.ini
@@ -101,14 +101,14 @@ The command above outputs info about **all** hosts in the inventory, the groups 
 
 ??? info "Save some time and leave out some parameters?"
 
-    You need to provide the path to your inventory file with the `-i` (`--inventory`) parameter **everytime** when executing the command.
+    You need to provide the path to your inventory file with the `-i` (`--inventory`) parameter **every time** when executing the command.
 
     ```bash
     ansible-inventory -i hosts.ini --list
     ```
-    You can use the absolut or relative path.
+    You can use the absolute or relative path.
 
-    If you don't want to add `-i hosts.ini` everytime you run a command, you can specify it in an `ansible.cfg` file in your working directory.
+    If you don't want to add `-i hosts.ini` every time you run a command, you can specify it in an `ansible.cfg` file in your working directory.
 
     ```bash
     touch ansible.cfg
@@ -203,7 +203,7 @@ Ok, looks good, try the ad-hoc command again.
     }
     ```
 
-A missing dependency, Ansible modules are (mostly) written in Python (or in Powershell for Windows), they sometimes need additional Python modules or libraries. Let's install the missing depedency:
+A missing dependency, Ansible modules are (mostly) written in Python (or in Powershell for Windows), they sometimes need additional Python modules or libraries. Let's install the missing dependency:
 
 ```bash
 pip3 install pywinrm --user
@@ -234,7 +234,7 @@ ansible -i hosts.ini windows -m ansible.windows.win_ping
     Looks like we can't authenticate against the Windows target node.
 
 Authentication of Ansible (or in effect, us) against the Windows target node needs a Kerberos ticket.  
-Do you remember the `ansible_user` variable in your inventory file? You referenced your personal (Admin) user there, we need to create a Kerberos ticket on the Ansible Dev Node for this one. Ansible uses this user to connect to the target node. 
+Do you remember the `ansible_user` variable in your inventory file? You referenced your personal (Admin) user there, we need to create a Kerberos ticket on the Ansible Dev Node for this one. Ansible uses this user to connect to the target node.
 
 Run the following command and input the password to authenticate your Admin-User:
 
@@ -244,7 +244,7 @@ kinit <username>
 
 !!! tip
     Naturally, replace `<username>`.  
-    Kerberos is picky when it comes to spelling and capitalization, you **must** use the exact spelling when issueing your Kerberos ticket as in the value of the `ansible_user` variable.
+    Kerberos is picky when it comes to spelling and capitalization, you **must** use the exact spelling when issuing your Kerberos ticket as in the value of the `ansible_user` variable.
 
 You can check if the ticket was granted and which principal is used with `klist`.
 
@@ -313,7 +313,7 @@ The results returned will be different depending on which module is used, as the
 
 ## Step 2 - Get infos about target
 
-Ad-hoc commands are perfect to gather informations about your target system.
+Ad-hoc commands are perfect to gather information about your target system.
 
 ### Step 2.1 - On CLI
 
@@ -327,7 +327,7 @@ Run the following command:
 ansible -i hosts.ini windows -m ansible.windows.setup
 ```
 
-You are seeing loads of useful informations and you can use every bit as variables in your playbooks later on!
+You are seeing loads of useful information and you can use every bit as variables in your playbooks later on!
 
 ### Step 2.2 - In AAP
 
@@ -380,18 +380,18 @@ The output looks something like this:
 student@ansible-1 workshop_project]$ ansible -i hosts.ini windows -m ansible.windows.win_shell -a "Get-Service"
 student1-win1 | CHANGED | rc=0 >>
 
-Status   Name               DisplayName                           
-------   ----               -----------                           
-Running  AmazonSSMAgent     Amazon SSM Agent                      
-Stopped  AppIDSvc           Application Identity                  
-Stopped  AppMgmt            Application Management                
-Stopped  AppReadiness       App Readiness                         
-Stopped  AppXSvc            AppX Deployment Service (AppXSVC)     
-Stopped  AWSLiteAgent       AWS Lite Guest Agent                  
-Running  BFE                Base Filtering Engine                 
-Stopped  BITS               Background Intelligent Transfer Ser...
-Running  CertPropSvc        Certificate Propagation               
-Stopped  cfn-hup            CloudFormation cfn-hup                
+Status   Name               DisplayName  
+------   ----               -----------  
+Running  AmazonSSMAgent     Amazon SSM Agent  
+Stopped  AppIDSvc           Application Identity  
+Stopped  AppMgmt            Application Management  
+Stopped  AppReadiness       App Readiness  
+Stopped  AppXSvc            AppX Deployment Service (AppXSVC)  
+Stopped  AWSLiteAgent       AWS Lite Guest Agent  
+Running  BFE                Base Filtering Engine  
+Stopped  BITS               Background Intelligent Transfer Service
+Running  CertPropSvc        Certificate Propagation  
+Stopped  cfn-hup            CloudFormation cfn-hup  
 Stopped  ClipSVC            Client License Service (ClipSVC)
 ...
 ```

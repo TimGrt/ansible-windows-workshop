@@ -1,0 +1,46 @@
+---
+# tasks file for iis_simple
+
+- name: Install IIS
+  ansible.windows.win_feature:
+    name: Web-Server
+    state: present
+
+- name: Create site directory structure
+  ansible.windows.win_file:
+    path: "{{ item.path }}"
+    state: directory
+  loop: "{{ iis_sites }}"
+
+- name: Create IIS site
+  ansible.windows.win_iis_website:
+    name: "{{ item.name }}"
+    state: started
+    port: "{{ item.port }}"
+    physical_path: "{{ item.path }}"
+  loop: "{{ iis_sites }}"
+  notify: restart_iis_service_handler
+
+- name: Open port for site on the firewall
+  ansible.windows.win_firewall_rule:
+    name: "iisport{{ item.port }}"
+    enable: true
+    state: present
+    localport: "{{ item.port }}"
+    action: Allow
+    direction: In
+    protocol: Tcp
+  loop: "{{ iis_sites }}"
+
+- name: Template simple web site to iis_site_path as index.html
+  ansible.windows.win_template:
+    src: 'index.html.j2'
+    dest: '{{ item.path }}\index.html'
+  loop: "{{ iis_sites }}"
+
+- name: Show website addresses
+  ansible.builtin.debug:
+    msg: "{{ item }}"
+  loop:
+    - http://{{ ansible_host }}:8080
+    - http://{{ ansible_host }}:8081

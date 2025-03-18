@@ -1,0 +1,46 @@
+---
+
+profile: production
+quiet: true
+
+# Disabling strict mode as certain task files are excluded
+# This silences the warning of files not found from 'ansible-lint-ignore.txt'
+strict: false
+exclude_paths:
+  - .cache/
+  - .github/
+  - mkdocs.yml
+
+var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+
+enable_list:
+  - args
+  - empty-string-compare
+  - no-log-password
+  - no-same-owner
+
+skip_list:
+  - yaml[indentation] # tasks are shown with to correct indentation for copy-paste
+
+# Pre-Commit will complain about non-existing collection
+# As we run in offline mode this is fine, but modules need to be mocked
+mock_modules:
+  - ansible.windows.win_copy
+  - ansible.windows.win_feature
+  - ansible.windows.win_file
+  - ansible.windows.win_service
+  - ansible.windows.win_template
+  - ansible.windows.win_updates
+  - community.windows.win_firewall_rule
+  - community.windows.win_iis_website
+
+mock_roles:
+  - iis_simple
+
+kinds:
+  - playbook: "**/*playbook*.yml"
+  - tasks: "**/*task*.yml"
+  - vars: "**/*variables*.yml"
+
+# Offline mode disables installation of requirements.yml and schema refreshing
+offline: true
