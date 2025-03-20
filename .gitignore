@@ -2,6 +2,7 @@
 .ansible/
 # Python VE folder
 ve-mkdocs-dev/
+mkdocs-venv/
 # Build folder when running 'mkdocs build'
 site/
 # Assets downloaded by privacy plugin
