@@ -105,3 +105,4 @@ nav:
     - windows-automation/windows-advanced-playbooks.md
     - windows-automation/windows-roles.md
     - windows-automation/windows-patch.md
+    - windows-automation/windows-winrm.md
