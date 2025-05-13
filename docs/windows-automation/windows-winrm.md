@@ -62,3 +62,26 @@ Finally, confirm that the WinRM service is running and that port 5985 is open wi
 ```powershell
 winrm enumerate winrm/config/Listener
 ```
+
+## Step 2 - Create a user for the execution of ansible playbooks
+
+In the next step, we will create a dedicated user account on our Windows host that will be used to execute the Ansible playbooks designed for automating administrative tasks. This user account is necessary not only for authentication, but also for enforcing access control, maintaining security, and ensuring consistent automation behavior. For example, we can assign this user only the specific permissions required for automation, without granting full administrative rights.
+
+To proceed, open an elevated PowerShell terminal and create a new user named `ansible` with the password `automation123`:
+
+```powershell
+net user ansible automation123 /add
+```
+
+To make it simple for now, we give our user administration rights by adding him to the corresponding group:
+
+```powershell
+net localgroup Administrators ansible /add
+```
+
+Finally, let us confirm that the user is created and in the admin group:
+
+```powershell
+Get-LocalUser -Name “ansible”
+Get-LocalGroupMember -Group "Administrators"
+```
