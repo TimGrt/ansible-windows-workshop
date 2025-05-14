@@ -1,4 +1,4 @@
-# 2 - Writing playbooks
+# Writing playbooks
 
 Let’s get started writing our first Ansible **playbook**!  
 

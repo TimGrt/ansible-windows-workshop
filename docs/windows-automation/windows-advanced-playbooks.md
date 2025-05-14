@@ -1,4 +1,4 @@
-# 4 - Advanced playbook concepts
+# Advanced playbook concepts
 
 Previous exercises showed you the basics of Ansible playbooks. In the
 next few exercises, we are going to teach some more advanced ansible

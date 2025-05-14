@@ -1,6 +1,9 @@
-# 7 - Configure WinRM on target host
+# Configure WinRM on target host
 
-This section guides you through the initial process of configuring WinRM and adding a user that Ansible playbooks will operate with on the windows host you want to automate.
+This section guides you through the initial process of configuring WinRM and adding a user that Ansible playbooks will operate with on the windows host you want to automate. It is the first step when automating Windows hosts with Ansible!
+
+!!! tip
+    Depending on your demo environment or target host this might not be necessary, as WinRM is already configured.
 
 ## Preparation
 
@@ -20,9 +23,10 @@ If you run the `Get-ExecutionPolicy` command again, the output should now see `R
 
 ## Step 1 - Set up WinRM
 
-Now that you can execute powershell scripts, let us create a script that sets up the Windows Remote Management Protocol `WinRM`. Try to find the script you need to configure WinRM in the [Ansible documentation](https://docs.ansible.com/ansible/latest/index.html){:target="_blank"}. Then paste it into a text editor like notepad and save it as (for example) `winrm_script.ps1`.
+Now that you can execute powershell scripts, let us create a script that sets up the Windows Remote Management Protocol `WinRM`. Try to find the script you need to configure WinRM in the [Ansible documentation](https://docs.ansible.com/ansible/latest/os_guide/intro_windows.html){:target="_blank"}. Then paste it into a text editor like notepad and save it as (for example) `winrm_script.ps1`.
 
 ??? example "You also can find the script you need here:"
+
     ```powershell
     # Enables the WinRM service and sets up the HTTP listener
     Enable-PSRemoting -Force
