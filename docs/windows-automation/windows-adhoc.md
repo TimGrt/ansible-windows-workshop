@@ -1,4 +1,4 @@
-# 1 - Ad-hoc commands
+# Ad-hoc commands
 
 For our first exercise, we are going to run some ad-hoc commands to help you get a feel for how Ansible works. Ansible ad-hoc commands enable you to perform tasks on remote nodes without having to write a playbook. They are very useful when you simply need to do one or two things quickly, to many remote nodes.
 

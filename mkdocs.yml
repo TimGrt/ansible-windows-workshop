@@ -99,9 +99,10 @@ nav:
       - index.md
       - preparation.md
   - "Exercises":
-    - windows-automation/windows-adhoc.md
-    - windows-automation/windows-playbook.md
-    - windows-automation/windows-project.md
-    - windows-automation/windows-advanced-playbooks.md
-    - windows-automation/windows-roles.md
-    - windows-automation/windows-patch.md
+    - "0 - Optional: Configure WinRM on target host": windows-automation/windows-winrm.md
+    - "1 - Ad-hoc commands": windows-automation/windows-adhoc.md
+    - "2 - Writing playbooks": windows-automation/windows-playbook.md
+    - "3 - Sync Project to AAP": windows-automation/windows-project.md
+    - "4 - Advanced playbook concepts": windows-automation/windows-advanced-playbooks.md
+    - "5 - Roles": windows-automation/windows-roles.md
+    - "6 - Optional: Automated Patching": windows-automation/windows-patch.md

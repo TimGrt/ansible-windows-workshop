@@ -1,4 +1,4 @@
-# 3 - Sync Project to AAP
+# Sync Project to AAP
 
 A job template in AAP is a definition and set of parameters for running an Ansible job. Job templates are useful to execute the same job many
 times. Before you can create a job template with a new playbook, you must first sync your Project so that Controller knows about it.  
