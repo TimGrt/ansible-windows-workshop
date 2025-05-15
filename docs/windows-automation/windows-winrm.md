@@ -67,7 +67,35 @@ Finally, confirm that the WinRM service is running and that port 5985 is open wi
 winrm enumerate winrm/config/Listener
 ```
 
-## Step 2 - Create a user for the execution of ansible playbooks
+## Step 2 - Configure WinRM
+
+As we are currently using an unencrypted HTTP connection, we need to enable two additional parameters in the WinRM configuration to allow the Ansible controller to connect to our Windows host.
+
+First, we need WinRM to allow unencrypted traffic:  
+
+```powershell
+Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true
+```
+
+Next, we set the authentication method of the WinRM service to Basic:
+
+```powershell
+Set-Item -Path WSMan:\localhost\Service\Auth\Basic -Value $true
+```
+
+Finally, let us restart the service to ensure that the new configuration is applied:
+
+```powershell
+Restart-Service WinRM
+```
+
+You can verify that these settings have been applied correctly by running the following command (and checking the Service section of the configuration):
+
+```powershell
+winrm get winrm/config
+```
+
+## Step 3 - Create a user for the execution of ansible playbooks
 
 In the next step, we will create a dedicated user account on our Windows host that will be used to execute the Ansible playbooks designed for automating administrative tasks. This user account is necessary not only for authentication, but also for enforcing access control, maintaining security, and ensuring consistent automation behavior. For example, we can assign this user only the specific permissions required for automation, without granting full administrative rights.
 
